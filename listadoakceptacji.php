@@ -16,7 +16,6 @@
 	$pracownik = (($sUpr & 1) == '1') ? TRUE : FALSE;
 
 	$link = polaczZBaza($host, $uzytkownik, $haslo, $nazwabazydanych);
-
 	if ($sUpr == 1) { // jeśli tylko pracownik 
 		$warunek = "StatusZatw = 1 AND StatusReal = 0 AND akcPrez = 0 AND p.id = {$sId}"; // StatusZatw = 1 - zamowienia zatwierdzone
 	}

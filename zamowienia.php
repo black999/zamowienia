@@ -65,161 +65,7 @@ if  (($_GET['menu']) == 'dodaj'){  //dodawanie nowego zamownienia
 } 
 if  (($_GET['menu']) == 'lista') {  //lista zamownienia
 	if (isset($_GET['id'])) {   //jesli podano id wyświetlamy towary z zamownienia o  numerze id
-		// $fIdzam = $_GET['id'];
 		
-		// // $wartoscZam = 0;  
-		// $wartoscZam = OblWartZam($fIdzam, $link); // wyliczanie wartosci zamownienia
-		
-		// $sql = "SELECT zm.StatusZatw, zm.Data, zm.akcKier, zm.akcZam, zm.akcKsie, zm.akcPrez, zm.StatusReal, zm.Info, p.Imie, p.Nazwisko 
-		// from zamowienia zm 
-		// inner join personel p on zm.Zamawiajacy = p.id 
-		// WHERE zm.IdZamowienia ='" . $fIdzam . "'";
-		// $result = mysqli_query($link, $sql);
-		// $row = mysqli_fetch_assoc($result);
-		// $fData = $row['Data'];
-		// $ImNaz = $row['Imie'] . " " . $row['Nazwisko'];
-		// $akcKier = $row['akcKier'];
-		// $akcZam = $row['akcZam'];
-		// $akcKsie = $row['akcKsie'];
-		// $akcPrez = $row['akcPrez'];
-		// $statusZatw = $row['StatusZatw'];
-		// $statusReal = $row['StatusReal'];
-		// $Info = $row['Info'];
-			
-		// echo "<DIV class='listwaZam'>";
-		// 	echo "<span class='text'>Zamównienie z dnia :</span><span class='dane'> " . $fData . "</span><span class='text'>Zamawiający :
-		// 	</span><span class='dane'>" . $ImNaz . "</span><span class='text'>Wartość zamówienia : </span><span class='dane'>" . $wartoscZam . " zł</span>";
-		// echo "</DIV>";
-		
-		// echo "<DIV class='statusZam'>";     // spr status zamownienia i wyswietlamy możlowość zatwierdzenia i realizacji
-		// 	echo "<span>Szczegóły zamówienia</span>";
-		// 		if ($statusZatw == '0')  {
-		// 			echo "<span></span><span style='color: red'>NIEZATWIERDZONE</span> ";
-		// 			//jesli zamownienie ma wartosc zero nie jest możliwe zatwierdzenie
-		// 			if ($wartoscZam > 0) echo "<span><BUTTON type='button'  class='button' onclick=\"window.location.href='zamowienia.php?menu=zatw&fIdzam=" . $fIdzam . "'\">  Zatwierdz  </BUTTON></span>";
-		// 			echo "<BUTTON type='button'  class='button' onclick=\"window.location.href='edycjazamowienia.php?fIdzam=". $fIdzam ."'\">  Edytuj  </BUTTON>";
-		// 		}
-		// 		if ($statusZatw == '1') {
-		// 			echo "<span></span><span style='color: green'>ZATWIERDZONE</span>";
-		// 			if ($statusReal != 1 && $akcKier != 0 && $akcZam != 0 && $akcKsie != 0 && $akcPrez !=0 && (($_SESSION['sUpr'] & 4) == 4)) { // jesli zaakceptowane i mamy uprawnienia
-		// 				echo "<span><BUTTON type='button'  class='button' onclick='document.frealizujZam.submit();'>  REALIZUJ  </BUTTON></span>";
-		// 			}
-  //                   if ($statusReal == '1') {
-		// 			   echo "<span></span><span style='color: blue'> ZAKOŃCZONE </span>";
-  //                   }
-		// 		}
-				
-				
-		// echo "</DIV>";
-		
-		// echo "<div class='lista'>";  //odczytanie danych
-		// 		$sql = "SELECT z.IdZamowieniaTow, z.Ilosc, z.CenaRealizacji, t.cenaZak, t.nazwa, z.Ilosc*t.cenaZak as wartosc 
-  //                       from zamowieniatow z
-		// 				inner join towary t on z.Towar = t.Id
-		// 				where z.IdZam = '" . $fIdzam . "' ORDER BY IdZamowieniaTow DESC";
-		// 		$result = mysqli_query($link, $sql);
-		// 		$lp = 1;
-		// 		if (mysqli_num_rows($result) > 0) {     	// output data of each row
-		// 		echo "<TABLE><TR><TH>L.p.</TH><TH>Nazwa towaru</TH><TH>Ilość</TH>";
-  //               if ($akcKier != 0 && $akcZam != 0 && $akcKsie != 0 && $akcPrez !=0 && (($_SESSION['sUpr'] & 4) == 4)) {   
-  //                   //jesli do realizacji i may uprawnienia to wyświetlamy naglowek ceny zakkupu
-  //                   echo "<TH class='money'>Cena</TH>";
-  //               }
-  //               echo "<TH class='money'>Cena zakupu</TH><TH class='money'>Wartość</TH></TR>";
-		// 		while($row = mysqli_fetch_assoc($result)) {
-		// 			echo "<TR>";
-		// 			echo "<TD style='width: 30px;'>" .$lp++ . "</TD>";
-		// 			echo "<TD style='width: 300px;'>" . $row["nazwa"]. "</TD>";
-		// 			echo "<TD>" . $row["Ilosc"]. "</TD>";
-  //                   if ($akcKier != 0 && $akcZam != 0 && $akcKsie != 0 && $akcPrez !=0 && (($_SESSION['sUpr'] & 4) == 4)) {
-  //                       //jesli do realizacji i mamy uprawnienia to wyświetlamy okno do wprowadzenie ceny zakupu
-  //                       echo "<FORM action='zamowienia.php?menu=realizujZam&fIdzam=".$fIdzam ."' method='POST' name='frealizujZam'>";
-  //                       echo "<TD class='money'><INPUT type='text' name='". $row{"IdZamowieniaTow"} ."' value='". $row["CenaRealizacji"]. "'maxlength=7 size=5></TD>";
-  //                   }
-		// 			echo "<TD class='money'>" . $row["cenaZak"]. "</TD>";
-		// 			echo "<TD class='money'>" . $row["wartosc"]. "</TD>";
-		// 			//echo "<TD class='opcje'><a href='zamowienia.php?menu=usun&id=" . $fIdzam . "&idZamtow=" . $row["IdZamowieniaTow"] . "'>usuń</TD>";
-		// 			echo "</TR>";
-		// 		}
-  //                if ($akcKier != 0 && $akcZam != 0 && $akcKsie != 0 && $akcPrez !=0 && (($_SESSION['sUpr'] & 4) == 4)) {   
-  //                   //jesli do realizacji konczymy formatke
-  //                   //echo "<INPUT type='SUBMIT' >";    
-  //                   echo "</FORM>";     //zakonczenie formatki do wpisania ceny zakupu 
-  //               }    
-  //               echo "<TR'><TD></TD><TD></TD><TD></TD><TD class='suma'>RAZEM :</TD><TD class='suma'>" . $wartoscZam . " zł</TD></TR>";
-		// 		echo "</TABLE>";
-		// 		} 
-		// echo "</div>";		
-		
-		// if ($statusZatw == '1') {   //jesli zamownienie jest zatwierdzone wyświetlamy listę akceptacji i możliwość akceptacji
-		// 	echo "<div class='listaAkceptacji'>";
-		// 		echo "<p><h3>Akceptacje </h3></p>";
-		// 		echo "<TABLE>";
-				
-		// 		echo "<TR>";
-		// 		echo "<TD><b>Kierownik<b></TD>";
-		// 		if ($akcKier == 0) {  //spr czy jest akceptacja 
-		// 			echo "<TD style='color: red'>Brak</TD>";
-		// 			if (($sUpr & 2 ) == 2)  { /// spr. czy mamy uprawnienia
-		// 				echo "<TD><span><BUTTON type='button'  class='button' onclick=\"window.location.href='zamowienia.php?menu=akc&fIdzam=". $fIdzam ."&ftyp=kier'\">  Akceptuj  </BUTTON></span></TD> ";
-		// 				echo "<TD><BUTTON type='button'  class='button-danger' onclick=\"window.location.href='zamowienia.php?menu=odrzucZam&fIdzam=". $fIdzam ."'\">  Odrzuć  </BUTTON></TD> ";
-		// 			}
-		// 		} else {
-		// 			echo "<TD style='color: green'>Akceptacja</TD>
-		// 					<TD>" . "  " . "&nbsp&nbsp Akceptujący :&nbsp&nbsp" . $personel[$akcKier]->Nazwisko . " " . $personel[$akcKier]->Imie ."</TD>";
-		// 		}
-		// 		echo "</TR>";
-				
-		// 		echo "<TR>";
-		// 		echo "<TD><b>Zam. publiczne</b></TD>";
-		// 		if ($akcZam == 0) { //spr czy jest akceptacja 
-		// 			echo "<TD style='color: red'>Brak</TD>";
-		// 			if ((($sUpr & 4 ) == 4) && ($akcKier != 0)) {  // spr czy mamy uprawnienia
-		// 				echo "<TD><span><BUTTON type='button'  class='button' onclick=\"window.location.href='zamowienia.php?menu=akc&fIdzam=". $fIdzam ."&ftyp=zamp'\">  Akceptuj  </BUTTON></span></TD> ";
-		// 				echo "<TD><BUTTON type='button'  class='button-danger' onclick=\"window.location.href='zamowienia.php?menu=odrzucZam&fIdzam=". $fIdzam ."'\">  Odrzuć  </BUTTON></TD> ";
-		// 			}
-		// 		} else {
-		// 			echo "<TD style='color: green'>Akceptacja</TD>
-		// 					<TD>" . "  " . "&nbsp&nbsp Akceptujący :&nbsp&nbsp" . $personel[$akcZam]->Nazwisko . " " . $personel[$akcZam]->Imie . "</TD>";
-		// 		}				
-		// 		echo "</TR>";
-				
-		// 		echo "<TR>";
-		// 		echo "<TD><b>Księgowość</b></TD>";
-		// 		if ($akcKsie == 0) { //spr czy jest akceptacja 
-		// 			echo "<TD style='color: red'>Brak</TD>";
-		// 			if ((($sUpr & 8 ) == 8) && ($akcKier != 0)) {  //spr czy mamy uprawnienia 
-		// 				echo "<TD><span><BUTTON type='button'  class='button' onclick=\"window.location.href='zamowienia.php?menu=akc&fIdzam=". $fIdzam ."&ftyp=ksie'\">  Akceptuj  </BUTTON></span></TD> ";
-		// 				echo "<TD><BUTTON type='button'  class='button-danger' onclick=\"window.location.href='zamowienia.php?menu=odrzucZam&fIdzam=". $fIdzam ."'\">  Odrzuć  </BUTTON></TD> ";
-		// 			}
-		// 		} else {
-		// 			echo "<TD style='color: green'>Akceptacja</TD>
-		// 					<TD>" . "  " . "&nbsp&nbsp Akceptujący :&nbsp&nbsp" . $personel[$akcKsie]->Nazwisko . " " . $personel[$akcKsie]->Imie . "</TD>";
-		// 		}			
-		// 		echo "</TR>";
-
-		// 		echo "<TR>";
-		// 		echo "<TD><b>Prezes</b></TD>";
-		// 		if ($akcPrez == 0) { //spr czy jest akceptacja 
-		// 			echo "<TD style='color: red'>Brak</TD>";
-		// 			if ((($sUpr & 16 ) == 16) && ($akcZam != 0) && ($akcKsie != 0)) {   //spr czy mamy uprawnienia
-		// 			echo "<TD><span><BUTTON type='button'  class='button' onclick=\"window.location.href='zamowienia.php?menu=akc&fIdzam=". $fIdzam ."&ftyp=prez'\">  Akceptuj  </BUTTON></span></TD> ";
-		// 			echo "<TD><BUTTON type='button'  class='button-danger' onclick=\"window.location.href='zamowienia.php?menu=odrzucZam&fIdzam=". $fIdzam ."'\">  Odrzuć  </BUTTON></TD> ";
-		// 			}
-		// 		} else {
-		// 			echo "<TD style='color: green'>Akceptacja</TD>
-		// 					<TD>" . "  " . "&nbsp&nbsp Akceptujący :&nbsp&nbsp" . $personel[$akcPrez]->Nazwisko . " " . $personel[$akcPrez]->Imie . "</TD>";
-		// 		}					
-		// 		echo "</TR>";
-		// 		echo "</TABLE>";
-		// 		echo "<BR><BR>";
-		// 		echo "<FORM action='zamowienia.php?menu=dodajInfo&fIdzam=" . $fIdzam . "' method='POST'>";
-		// 			echo "<h3>Komentarz do zamówienia:</h3>";
-		// 			echo "<textarea rows='5' cols='60' name='fInfo'>". $Info . "\n" . $sImie . " " . $sNazwisko . ":\n</textarea><br>";
-		// 			echo "<input type='submit' class='button' value='Zapisz komentarz'>";
-		// 		echo "</FORM>";
-		// 	echo "</div>";
-		// }
 	} else {
 	$warunek2 = ($_SESSION['sUpr'] < 4) ? " WHERE Dzial='".$_SESSION['sIdDzial']."'" : ""; //jesli tylko kierownik to moze wybierac z personelu oboby ze swojego dzialu
 	$sql = "SELECT * FROM personel" .$warunek2;				//Jesli nie podano id wyświetlamy wszystkie zamownienia
@@ -338,9 +184,6 @@ if  (($_GET['menu']) == 'lista') {  //lista zamownienia
                 }
 			}
 			echo "<TD>" . $listaAkc . "</TD>";
-			//echo "<TD>" . $row["cenaZak"]. "</TD>";
-			//echo "<TD>" . $row["StatusZatw"]. "</TD>";
-			// echo "<TD class='money'><a href='zamowienia.php?menu=lista&id=" .$row["IdZamowienia"]. "'>Szczegóły</a></TD>";
 			echo "<TD class='money'><a href='szczegolyzam.php?fIdzam=" .$row["IdZamowienia"]. "'>Szczegóły</a></TD>";
             if ($row["StatusZatw"] == '0') {
                 //echo "<TD class='money' ><a href='zamowienia.php?menu=usunZam&id=" .$row["IdZamowienia"]. "' style='color: red'>Usuń</a></TD>";
@@ -354,15 +197,7 @@ if  (($_GET['menu']) == 'lista') {  //lista zamownienia
 	echo "</div>";
 	}
 }
-// if  (($_GET['menu']) == 'usun') {  //usuwanie poszczegolnych towarow z zamownienia
-// 	// $fIdzam = $_GET['id'];
-// 	// $fIdzamTow = $_GET['idZamtow'];
-// 	// $sql = "DELETE FROM zamowieniatow WHERE IdZamowieniaTow = '" . $fIdzamTow . "'";
-// 	// mysqli_query($link, $sql);
-// 	delTowarZZamowienia($link, $_GET['idZamtow']);
-// 	$string = "Location: zamowienia.php?menu=dodaj&fIdzam=" . $_GET['id'];
-// 	header($string);
-// }
+
 if  (($_GET['menu']) == 'usunZam') {  //usuwanie  zamownienia
 	$fIdzam = $_GET['id'];
 	$sql = "DELETE FROM zamowienia WHERE IdZamowienia = '" . $fIdzam . "'";
@@ -406,13 +241,8 @@ if  (($_GET['menu']) == 'akc') {
 }
 if  (($_GET['menu']) == 'realizujZam') {
 	$fIdzam = $_GET['fIdzam'];
-	// foreach (array_keys($_POST) as $IdZam) {
- //        $cenaRealizacji = str_replace(",",".",$_POST[$IdZam]); 
- //        $sql = "UPDATE zamowieniatow SET CenaRealizacji='" . $cenaRealizacji . "' WHERE IdZamowieniaTow = '" . $IdZam . "'";
- //        mysqli_query($link, $sql) or die ('Błąd zapisu do bazy. Error ' . mysql_errno());
- //    }
-     $sql ="UPDATE zamowienia SET StatusReal='1' WHERE IdZamowienia='". $fIdzam . "'";
-     mysqli_query($link, $sql) or die ('Błąd zapisu do bazy. Error ' . mysql_errno());
+    $sql ="UPDATE zamowienia SET StatusReal='1' WHERE IdZamowienia='". $fIdzam . "'";
+    mysqli_query($link, $sql) or die ('Błąd zapisu do bazy. Error ' . mysql_errno());
     $string = "Location: listadorealizacji.php";
 	header($string); 
 }
