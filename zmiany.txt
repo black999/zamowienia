@@ -1,0 +1,12 @@
+19.04.2017
+dodano pole Info do tabeli zamowienia typu TEXT  - wprowadzone 09.05.2017
+
+09.05.2017
+dodano pola koszt i kosztOpis do tabeli zamowienia (calkowity koszt r3ealizacji zam. np koszt transportu) - wprowadzone 09.05.2017
+
+19.10.2017
+dodano pole dostawca do tabeli towary  - wprowadzone 19.10.2017
+
+31.10.2107
+dodaneo pole uwagi do tabeli towary - wprowadzone 31.10.2017
+dodano pola dataKier, dataZam, dataKsie, dataPrez do tabeli zamowienia

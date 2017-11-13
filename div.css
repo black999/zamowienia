@@ -1,0 +1,25 @@
+.okno1 {
+	border-color: black;
+	border-style: solid;
+	height: 60vh;
+	overflow: scroll;
+	padding-left: 5px;
+	
+	
+}
+
+.okno2 {
+	border-style: solid;
+	border-color: black;
+	height: 20vh;
+	margin-top: 2px;
+}
+.okno3 {
+	border-color: black;
+	border-style: solid;
+	height: 50%;
+	overflow: scroll;
+	padding-left: 5px;
+	
+	
+}
