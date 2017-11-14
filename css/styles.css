@@ -168,9 +168,9 @@
 	 
  }
 .lista {
-  max-height: 550px;
+  /*max-height: 550px;*/
   /*background: yellow;*/
-  overflow-y: scroll;
+  /*overflow-y: scroll;*/
   color: #000000;
   font-weight: normal;
   text-decoration: none;

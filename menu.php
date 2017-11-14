@@ -6,9 +6,11 @@
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1">
    <link rel="stylesheet" href="styles.css">
-   <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
-   <script type="text/javascript" src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap.min.js"></script>
-   <script src="script.js"></script>
+   <!-- <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script> -->
+    <script src="script/jquery.js" type="text/javascript"></script>
+    <script src="script/DataTable.js" type="text/javascript"></script>
+ 
+   <script src="script/menu.js"></script>
    <title></title>
 </head>
 <body>

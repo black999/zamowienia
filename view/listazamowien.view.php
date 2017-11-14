@@ -3,9 +3,10 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="styles.css">
-    <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
-   	<script type="text/javascript" src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap.min.js"></script>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="script/jquery.js" type="text/javascript"></script>
+   	<script src="script/dataTable.js" type="text/javascript"></script>
+   	 <link rel="stylesheet" href="css/dataTable.css">
 	<title>Lista zamowień odrzuconych</title>
 </head>
 <body>
@@ -61,7 +62,27 @@
 <script>
 $(document).ready(function() {
 	$("#tabela1").DataTable( {
-    } );
+		"lengthMenu": [ [ 20, 50, 75, 100, -1 ], [ 20, 50, 75, 100, "All" ] ],
+        "order": [ 0, 'desc' ],
+        "language": {
+            "emptyTable":     "Brak danych w tabeli",
+            "info":           "Widok _START_ do _END_ z _TOTAL_ pozycji",
+            "infoEmpty":      "Widok 0 do 0 z 0 pozycji",
+            "infoFiltered":   "(filtrowane z _MAX_ pozycji)",
+            "infoPostFix":    "",
+            "lengthMenu":     "Pokaż _MENU_ pozycji",
+            "loadingRecords": "Ładowanie...",
+            "processing":     "Processing...",
+            "search":         "Szukaj:",
+            "zeroRecords":    "Nie znaleziono pasujących wpisów",
+            "paginate": {
+                "first":      "Pierwszy",
+                "last":       "Ostatni",
+                "next":       "Następny",
+                "previous":   "Poprzedni"
+            },
+        }
+    });
 })
 </script>
 </body>

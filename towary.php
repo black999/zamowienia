@@ -3,9 +3,11 @@
 <head>
    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
    <meta name="viewport" content="width=device-width, initial-scale=1">
-   <link rel="stylesheet" href="styles.css">
-   <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
-   <script src="script.js"></script>
+   <link rel="stylesheet" href="css/styles.css">
+   <script src="script/jquery.js" type="text/javascript"></script>
+   <script src="script/dataTable.js" type="text/javascript"></script>
+   <script src="script/script.js"></script>
+   <link rel="stylesheet" href="css/dataTable.css">
    <title></title>
 </head>
 <body>
@@ -108,24 +110,24 @@ if  (($_GET['menu']) == 'dodaj') {
 	echo "</div>";
 }
 if  (($_GET['menu']) == 'lista') {     //formatka wyszukiwania towarow
-		echo "<div class='formatka'>";
-			echo "<FORM action='towary.php?menu=lista' method='POST'>";
-			echo "<TABLE>";
+		// echo "<div class='formatka'>";
+		// 	echo "<FORM action='towary.php?menu=lista' method='POST'>";
+		// 	echo "<TABLE>";
 
-			echo "<TR>";
-			echo "<TD>Nazwa towaru </TD>";
-			echo "<TD><INPUT name='fNazwaTow' class='pole' size=35 maxlength=40></TD>";
+		// 	echo "<TR>";
+		// 	echo "<TD>Nazwa towaru </TD>";
+		// 	echo "<TD><INPUT name='fNazwaTow' class='pole' size=35 maxlength=40></TD>";
 					
-			echo "<TD colspan='2' align='right'><INPUT type='SUBMIT' value='    SZUKAJ   '></TD>";
-			echo "</TR>";
+		// 	echo "<TD colspan='2' align='right'><INPUT type='SUBMIT' value='    SZUKAJ   '></TD>";
+		// 	echo "</TR>";
 
-			echo "</TABLE>";
-			echo "</FORM><BR><BR>";
-			//echo "<BUTTON type=button onclick=\"document.getElementById('test1').style.display='none'\">  Schowaj  </BUTTON>";
-			//echo "<p><BUTTON type=button onclick=\"document.getElementById('test1').style.display='block'\"> Pokaż </BUTTON></p>";
-		echo "</div>";
-		
-		echo "<div class='lista' id='test1'>";  //odczytanie danych towarów
+		// 	echo "</TABLE>";
+		// 	echo "</FORM><BR><BR>";
+		// echo "</div>";
+		echo "<div class='statusZam'>";
+			echo "Lista towarów";
+		echo "</div>";	
+		echo "<div class='lista'>";  //odczytanie danych towarów
 			if (!(isset($_POST['fNazwaTow']))) $_POST['fNazwaTow'] = '';
 			// uzywamy ponizej left join bo gdy nie ma dzialu towar to by sie nie wyswietlil na liscie
             $sql = "SELECT t.id, t.nazwa, t.cenaZak, t.uwagi, d.Nazwa as dzial, t.dostawca
@@ -137,10 +139,20 @@ if  (($_GET['menu']) == 'lista') {     //formatka wyszukiwania towarow
 
 			if (mysqli_num_rows($result) > 0) {
 				// output data of each row
-			echo "<TABLE><TR><TH>ID</TH><TH>Nazwa towaru</TH><TH>Dostawca</TH><TH>Uwagi</TH><TH>Grupa</TH><TH class='money'>Cena zakupu</TH><TH class='opcje'>Opcje</TH></TR>";
+			echo "<TABLE id='tabela1'>
+					<THEAD>
+						<TR>
+							<TH>Nazwa towaru</TH>
+							<TH>Dostawca</TH>
+							<TH>Uwagi</TH>
+							<TH>Grupa</TH>
+							<TH class='money'>Cena zakupu</TH>
+							<TH class='opcje'>Opcje</TH>
+						</TR>
+					</THEAD>";
+			echo "<TBODY>";
 			while($row = mysqli_fetch_assoc($result)) {
 				echo "<TR>";
-				echo "<TD style='width: 30px;'>" .$row["id"] . "</TD>";
 				echo "<TD style='width: 300px;'>" . $row["nazwa"]. "</TD>";
 				echo "<TD>" . $row["dostawca"]. "</TD>";
 				echo "<TD>" . $row["uwagi"]. "</TD>";
@@ -149,6 +161,7 @@ if  (($_GET['menu']) == 'lista') {     //formatka wyszukiwania towarow
 				echo "<TD class='opcje'><a href='towary.php?menu=edycja&id=" .$row["id"]. "'>Edycja</TD>";
 				echo "</TR>";
 			}
+			echo "</TBODY>";
 			echo "</TABLE>";
 			} 
 			mysqli_close($link);
@@ -235,5 +248,31 @@ if  (($_GET['menu']) == 'edycja') {
 	mysqli_close($link);	
 }
 ?>
+<script>
+$(document).ready(function() {
+	$("#tabela1").DataTable( {
+		"lengthMenu": [ [ 20, 50, 75, 100, -1 ], [ 20, 50, 75, 100, "All" ] ],
+        "order": [ 0, 'desc' ],
+        "language": {
+            "emptyTable":     "Brak danych w tabeli",
+            "info":           "Widok _START_ do _END_ z _TOTAL_ pozycji",
+            "infoEmpty":      "Widok 0 do 0 z 0 pozycji",
+            "infoFiltered":   "(filtrowane z _MAX_ pozycji)",
+            "infoPostFix":    "",
+            "lengthMenu":     "Pokaż _MENU_ pozycji",
+            "loadingRecords": "Ładowanie...",
+            "processing":     "Processing...",
+            "search":         "Szukaj:",
+            "zeroRecords":    "Nie znaleziono pasujących wpisów",
+            "paginate": {
+                "first":      "Pierwszy",
+                "last":       "Ostatni",
+                "next":       "Następny",
+                "previous":   "Poprzedni"
+            },
+        }
+    });
+})
+</script>
 </body>
 </html>
