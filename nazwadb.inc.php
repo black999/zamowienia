@@ -1,6 +1,6 @@
 <?php
 $host = "localhost";
-$nazwabazydanych = "baza_zamowienia";
+$nazwabazydanych = "zamowienia";
 $uzytkownik = "root";
 $haslo = "viD0k1";
 ?>

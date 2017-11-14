@@ -21,8 +21,14 @@
 	}
 	if ($sUpr > 1 && $sUpr < 4) { // jeśli tylko kierownik
 		if ($pracownik){   //jesli jednoczesnie pracownik to wyświetlamy wszystkie zmownienia łącznie z naszymi akceptacjami
-			$warunek = "StatusZatw = 1 AND StatusReal = 0 AND akcPrez = 0 AND p.id = {$sId}"; // StatusZatw = 1 - zamowienia zatwierdzone
+			// StatusZatw = 1 - zamowienia zatwierdzone
+			// ((Dzial = {$sIdDzial} AND akcKier = 0) - zlecenie nie zatwierdzone przez kierwonika i z działu kierownika
+			// (akcKier !=0 and p.id = {$sId}) - zlecenia zatwierdzone przez kierwonika i należące do niego samego
+			$warunek = "StatusZatw = 1 AND StatusReal = 0 AND akcPrez = 0 AND 
+						((Dzial = {$sIdDzial} AND akcKier = 0) OR 
+						(akcKier <> 0 and p.id = {$sId}))"; 
 		} else {
+			dd($sUpr);
 			$warunek = "StatusZatw = 1 AND StatusReal = 0 AND Dzial = {$sIdDzial} AND akcKier = 0"; // StatusZatw = 1 - zamowienia zatwierdzone
 		}
 	}
