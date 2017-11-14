@@ -3,7 +3,10 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/select2.css">
     <link rel="stylesheet" href="css/styles.css">
+    <script type="text/javascript" src="script/jquery.js"></script>
+    <script type="text/javascript" src="script/select2.js"></script>
 	<title>Edycja zamowienia</title>
 </head>
 <body>
@@ -23,7 +26,7 @@
 <div class="formatka">
 	<form action='?menu=dodaj&fIdzam=<?= $_GET['fIdzam'] ?>' method='POST'>
 		<label>Towar: </label>
-		<select name='fIdTowar' class='pole' autofocus>
+		<select name='fIdTowar' id="pole" class='pole' autofocus >
 			<?php foreach ($towary as $towarId) : ?>
 				<OPTION value="<?= $towarId->Id ?>">
 					<?= $towarId->nazwa . "&nbsp&nbsp Cena &nbsp" . $towarId->cenaZak . "&nbspzł"?>
@@ -84,5 +87,12 @@
 		</div>
 	</form>
 </div>
+<script>
+$(document).ready(function() {
+    $('#pole').select2();
+    theme: "classic";
+});
+</script>
+
 </body>
 </html>
