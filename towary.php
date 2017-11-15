@@ -104,20 +104,6 @@ if  (($_GET['menu']) == 'dodaj') {
 	echo "</div>";
 }
 if  (($_GET['menu']) == 'lista') {     //formatka wyszukiwania towarow
-		// echo "<div class='formatka'>";
-		// 	echo "<FORM action='towary.php?menu=lista' method='POST'>";
-		// 	echo "<TABLE>";
-
-		// 	echo "<TR>";
-		// 	echo "<TD>Nazwa towaru </TD>";
-		// 	echo "<TD><INPUT name='fNazwaTow' class='pole' size=35 maxlength=40></TD>";
-					
-		// 	echo "<TD colspan='2' align='right'><INPUT type='SUBMIT' value='    SZUKAJ   '></TD>";
-		// 	echo "</TR>";
-
-		// 	echo "</TABLE>";
-		// 	echo "</FORM><BR><BR>";
-		// echo "</div>";
 		echo "<div class='statusZam'>";
 			echo "Lista towarów";
 		echo "</div>";	
