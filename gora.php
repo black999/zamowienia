@@ -1,10 +1,6 @@
 <html lang=pl>
 <head>
-   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" >
-   <meta name="viewport" content="width=device-width, initial-scale=1">
-   <link rel="stylesheet" href="css/styles.css">
-   <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
-   <script src="script/script.js"></script>
+	<?php require ("view/naglowek.view.php"); ?>
    <title></title>
 </head>
 <body>

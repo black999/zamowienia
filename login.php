@@ -1,13 +1,9 @@
 <!doctype html>
 <html lang=''>
 <head>
-   <meta charset='utf-8'>
-   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-   <meta name="viewport" content="width=device-width, initial-scale=1">
-   <link rel="stylesheet" href="css/login.css">
-   <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
-   <script src="script/script.js"></script>
-   <title></title>
+	<?php require ("view/naglowek.view.php"); ?>
+	<link rel="stylesheet" href="css/login.css">
+   	<title>Logowanie do systemu</title>
 </head>
 <body>
 <div class="center">
@@ -15,7 +11,7 @@
 		<?php
 		session_start();
 		require_once 'nazwadb.inc.php';
-		require 'funkcje.php';
+		require 'core/funkcje.php';
 		$link = polaczZBaza($host, $uzytkownik, $haslo, $nazwabazydanych);
 		
 		if (isset($_GET['menu']) && ($_GET['menu'] == "logout")) {
@@ -29,7 +25,6 @@
 					}
 				</script>";
 		}
-		
       
 		if (isset($_POST['flogin'])) {
 			$flogin = $_POST['flogin'];

@@ -1,19 +1,13 @@
 <!doctype html>
 <html lang='pl'>
 <head>
-   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-   <meta name="viewport" content="width=device-width, initial-scale=1">
-   <link rel="stylesheet" href="css/styles.css">
-   <script src="script/jquery.js" type="text/javascript"></script>
-   <script src="script/dataTable.js" type="text/javascript"></script>
-   <script src="script/script.js"></script>
-   <link rel="stylesheet" href="css/dataTable.css">
-   <title></title>
+	<?php require ("view/naglowek.view.php"); ?>
+   	<title></title>
 </head>
 <body>
 <?php
 require_once 'nazwadb.inc.php';
-require 'funkcje.php';
+require 'core/funkcje.php';
 session_start();
 checkSesion();
 $link = polaczZBaza($host, $uzytkownik, $haslo, $nazwabazydanych);
