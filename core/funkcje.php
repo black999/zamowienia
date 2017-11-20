@@ -168,3 +168,52 @@ function updateKosztZamowienia($link, $Idzam, $kosztOpis, $koszt) {
 	$sql= "UPDATE zamowienia SET koszt = '{$koszt}', kosztOpis = '{$kosztOpis}' WHERE IdZamowienia = {$Idzam}";	
 	mysqli_query($link, $sql);
 }
+
+function getFaktury($link) {
+	$faktury = [];
+	$sql = 'SELECT * from faktury';
+	$result = mysqli_query($link, $sql);
+	if (mysqli_num_rows($result) > 0) {
+		while($row = mysqli_fetch_object($result)) {
+			$faktury[$row->id] = $row;  //wynik jest zwracany w postaci tablicy personel[id_osoby] {dane osoby jak z zapytania sql}
+		}
+		return $faktury;
+	} else {
+		return false;
+	}
+}
+
+function dodajFakture($link){
+		$rok = date('Y');
+		$miesiac = date('m');
+		$plik = date('YmdHisu') . ".pdf";
+		$base_dir = "e:/uploads/";
+		$target_dir = $base_dir . $rok . "/" . $miesiac . "/";
+		if (!is_dir($base_dir . $rok)){
+			mkdir($base_dir . $rok) or die('Nie można utworzyć katalogu ' . $base_dir . $rok);
+			if (!is_dir($base_dir . $rok . "/" . $miesiac)){
+				mkdir($target_dir) or die ('Nie można utworzyć katalogu ' . $target_dir);
+			};
+		};
+		$target_file = $target_dir . $plik;
+		$uploadOk = 1;
+		$imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
+
+		if ($_FILES['plik']['type'] != 'application/pdf'){
+			echo "plik nie jest dokumentem PDF <br>";
+			$uploadOk = 0;
+		}
+		if (file_exists($target_file)) {
+			echo "Sorry, file already exists.";
+			$uploadOk = 0;
+		}
+		if ($uploadOk == 0) {
+			echo "Sorry, your file was not uploaded.";
+		} else {
+			if (move_uploaded_file($_FILES["plik"]["tmp_name"], $target_file)) {
+				echo "The file ". basename( $_FILES["plik"]["name"]). " has been uploaded.";
+			} else {
+				echo "Sorry, there was an error uploading your file.";
+			}
+		}
+}

@@ -24,13 +24,18 @@
  		 <li><a href='listadoakceptacji.php' TARGET='srodek'><span>Do akceptacji</span></a></li>
        <li><a href='listadorealizacji.php' TARGET='srodek'><span>Do realizacji</span></a></li>
        <li class='last'><a href='listazrealizowanych.php' TARGET='srodek'><span>Zrealizowane</span></a></li>
-       
       </ul>
    </li>
    <li class='has-sub'><a href='#'><span>Towary</span></a>
       <ul>
          <li><a href='towary.php?menu=dodaj' TARGET='srodek'><span>Dodaj</span></a></li>
          <li class='last'><a href='towary.php?menu=lista' TARGET='srodek'><span>Lista/Edycja</span></a></li>
+      </ul>
+   </li>
+    <li class='has-sub'><a href='#'><span>Faktury</span></a>
+      <ul>
+         <li><a href='faktury.php' TARGET='srodek'><span>Dodaj</span></a></li>
+         <li class='last'><a href='' TARGET='srodek'><span>Lista/Edycja</span></a></li>
       </ul>
    </li>
    <li class='has-sub'><a href='#'><span>Personel</span></a>
