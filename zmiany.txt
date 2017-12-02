@@ -10,3 +10,7 @@ dodano pole dostawca do tabeli towary  - wprowadzone 19.10.2017
 31.10.2107
 dodaneo pole uwagi do tabeli towary - wprowadzone 31.10.2017
 dodano pola dataKier, dataZam, dataKsie, dataPrez do tabeli zamowienia
+
+02.12.2017
+dodanie pola biurowy do tabeli typ boolean domyślnie false
+
