@@ -5,7 +5,19 @@
 	<title>Lista faktur</title>
 </head>
 <body>
-	<form action="faktury.php?dodaj" method="POST" enctype="multipart/form-data">
+<?php if (isset($errorMessage))  : ?>
+	<div class="statusZam">
+		<?= $errorMessage ?>
+	</div>
+	<?php die(); ?>
+<?php endif;  ?>
+
+
+<div class="statusZam">
+	<?= $tytul ?>
+</div>
+<div class="lista">
+	<form id="form1" action="faktury.php?dodaj" method="POST" enctype="multipart/form-data">
 		<!-- MAX_FILE_SIZE must precede the file input field -->
     	<input type="hidden" name="MAX_FILE_SIZE" value="300000" />
 		<label>Wybierz fakturę do wysłania wielkość do 3 MB: </label> 
@@ -35,5 +47,16 @@
 			<?php endif; ?>
 		</tbody>
 	</table>
+</div>
+<script>
+	$(document).ready(function() {
+		$("#form1").submit(function(event) {
+			$dane = $(this);
+			$dane = $dane.serialize()
+			alert('dane przekazane' + $dane);
+		});
+		
+	});
+</script>
 </body>
 </html>

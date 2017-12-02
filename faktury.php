@@ -7,9 +7,10 @@
 
 	$link = polaczZBaza($host, $uzytkownik, $haslo, $nazwabazydanych);
 	if (isset($_GET['dodaj'])){
-		dodajFakture();
+		dodajFakture($link);
 	}
 
 	$faktury = getFaktury($link);
+	$tytul = "Dodawanie faktur";
 
 	require("view/listaFaktur.view.php");
