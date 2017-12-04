@@ -13,3 +13,11 @@ dodano pola dataKier, dataZam, dataKsie, dataPrez do tabeli zamowienia wprowadzo
 
 20.11.2017
 dodano tabelę faktury (id, opis, dataDodania, nazwaPliku) - wprowadzone 20.11.2017
+=======
+dodano pola dataKier, dataZam, dataKsie, dataPrez do tabeli zamowienia
+
+02.12.2017
+dodanie pola biurowy do tabeli typ boolean domyślnie false - wprowadzone 04.12.2017
+
+
+

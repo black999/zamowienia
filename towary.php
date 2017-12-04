@@ -20,7 +20,9 @@ if  (($_GET['menu']) == 'dodaj') {
 		$fCenaZak = str_replace(",",".",$fCenaZak); 
 		$fDostawca = $_POST['fDostawca'];
 		$fUwagi = $_POST['fUwagi'];
-		$query = "INSERT INTO towary VALUES (NULL, '$fDzial', '$fNazwaTow', '$fCenaZak', '$fDostawca', '$fUwagi')";
+		if (!isset($_POST['fBiurowy'])) $fBiurowy = '0';
+		$fBiurowy = $_POST['fBiurowy'];
+		$query = "INSERT INTO towary VALUES (NULL, '$fDzial', '$fNazwaTow', '$fCenaZak', '$fDostawca', '$fUwagi', '$fBiurowy')";
 		//echo "dodano towary";
 		mysqli_query($link, $query) or die ("Jakiś błąd");
 	}
@@ -65,7 +67,7 @@ if  (($_GET['menu']) == 'dodaj') {
 
 		echo "<TR>";
 		echo "<TD>Towar biurowy</TD>";
-		echo "<TD><INPUT type='checkbox' name='fbiurowy' value='1'></TD>";
+		echo "<TD><INPUT type='checkbox' name='fBiurowy' value='1'></TD>";
 		echo "</TR>";
 
 		echo "<TR>";
@@ -79,7 +81,7 @@ if  (($_GET['menu']) == 'dodaj') {
 	echo "<div class='lista'>";  //odczytanie danych towarów
 	
 		echo "<BR><H2>Towary ostatnio dodane</H2>";
-        $sql = "SELECT t.id, t.nazwa, t.cenaZak, t.uwagi, d.Nazwa as dzial
+        $sql = "SELECT t.id, t.nazwa, t.cenaZak, t.uwagi, t.biurowy, d.Nazwa as dzial
             FROM towary t
             LEFT JOIN dzialy d on t.IdDzial = d.IdDzial   
             ORDER BY t.id DESC LIMIT 20";
@@ -87,13 +89,14 @@ if  (($_GET['menu']) == 'dodaj') {
 
 		if (mysqli_num_rows($result) > 0) {
 			// output data of each row
-		echo "<TABLE><TR><TH>ID</TH><TH>Nazwa towaru</TH><TH>Grupa</TH><TH>Cena zakupu</TH><TH>Uwagi</TH><TH class='opcje'>Opcje</TH></TR>";
+		echo "<TABLE><TR><TH>ID</TH><TH>Nazwa towaru</TH><TH>Grupa</TH><TH>Cena zakupu</TH><TH>Biurowy</TH><TH>Uwagi</TH><TH class='opcje'>Opcje</TH></TR>";
 		while($row = mysqli_fetch_assoc($result)) {
 				echo "<TR>";
 				echo "<TD style='width: 30px;'>" .$row["id"] . "</TD>";
 				echo "<TD style='width: 300px;'>" . $row["nazwa"]. "</TD>";
                 echo "<TD>" . $row['dzial'] . "</TD>";
 				echo "<TD>" . $row["cenaZak"]. "</TD>";
+				echo "<TD>" . $row["biurowy"]. "</TD>";
 				echo "<TD>" . $row["uwagi"]. "</TD>";
 				echo "<TD class='opcje'><a href='towary.php?menu=edycja&id=" .$row["id"]. "'>Edycja</TD>";
 				echo "</TR>";
@@ -110,7 +113,7 @@ if  (($_GET['menu']) == 'lista') {     //formatka wyszukiwania towarow
 		echo "<div class='lista'>";  //odczytanie danych towarów
 			if (!(isset($_POST['fNazwaTow']))) $_POST['fNazwaTow'] = '';
 			// uzywamy ponizej left join bo gdy nie ma dzialu towar to by sie nie wyswietlil na liscie
-            $sql = "SELECT t.id, t.nazwa, t.cenaZak, t.uwagi, d.Nazwa as dzial, t.dostawca
+            $sql = "SELECT t.id, t.nazwa, t.cenaZak, t.uwagi, t.biurowy, d.Nazwa as dzial, t.dostawca
             FROM towary t
             LEFT JOIN dzialy d on t.IdDzial = d.IdDzial   
             WHERE t.nazwa LIKE '%".$_POST['fNazwaTow']."%'
@@ -126,6 +129,7 @@ if  (($_GET['menu']) == 'lista') {     //formatka wyszukiwania towarow
 							<TH>Dostawca</TH>
 							<TH>Uwagi</TH>
 							<TH>Grupa</TH>
+							<TH>Biurowy</TH>
 							<TH class='money'>Cena zakupu</TH>
 							<TH class='opcje'>Opcje</TH>
 						</TR>
@@ -137,6 +141,7 @@ if  (($_GET['menu']) == 'lista') {     //formatka wyszukiwania towarow
 				echo "<TD>" . $row["dostawca"]. "</TD>";
 				echo "<TD>" . $row["uwagi"]. "</TD>";
                 echo "<TD>" . $row['dzial'] . "</TD>";
+                echo "<TD>" . $row['biurowy'] . "</TD>";
 				echo "<TD class='money'>" . $row["cenaZak"]. "</TD>";
 				echo "<TD class='opcje'><a href='towary.php?menu=edycja&id=" .$row["id"]. "'>Edycja</TD>";
 				echo "</TR>";
@@ -148,11 +153,13 @@ if  (($_GET['menu']) == 'lista') {     //formatka wyszukiwania towarow
 		echo "</div>";
 }
 if  (($_GET['menu']) == 'edycja') {
-			if (isset($_POST['fNazwaTow'])) {
+		if (isset($_POST['fNazwaTow'])) {
 			$fNazwaTow = $_POST['fNazwaTow'];
 			$fCenaZak = $_POST['fCenaZak'];
 			$fDostawca = $_POST['fDostawca'];
 			$fUwagi = $_POST['fUwagi'];
+			if (!isset($_POST['fBiurowy'])) $fBiurowy = '0';
+			$fBiurowy = $_POST['fBiurowy'];
 			$id = $_GET['id'];
             $fDzial = $_POST['fDzial'];
 			$fCenaZak = str_replace(",",".",$fCenaZak); 
@@ -162,13 +169,14 @@ if  (($_GET['menu']) == 'edycja') {
 										IdDzial='$fDzial', 
 										cenaZak='$fCenaZak', 
 										dostawca='$fDostawca',
-										uwagi='$fUwagi'
+										uwagi='$fUwagi',
+										biurowy='$fBiurowy'
 						WHERE id='$id'";
 			//echo "dodano towary";
-			mysqli_query($link, $query) or die ("Jakiś błąd");
+			mysqli_query($link, $query) or die ("Błąd zapisu do bazy");
 			header("Location: towary.php?menu=lista");
 		}
-		$sql = "SELECT  t.nazwa, t.cenaZak, t.dostawca, t.uwagi, d.IdDzial, d.Nazwa as dzial
+		$sql = "SELECT  t.nazwa, t.cenaZak, t.dostawca, t.uwagi, t.biurowy, d.IdDzial, d.Nazwa as dzial
             FROM towary t
             LEFT JOIN dzialy d on t.IdDzial = d.IdDzial   
             WHERE id='".$_GET['id'] ."'";
@@ -215,7 +223,9 @@ if  (($_GET['menu']) == 'edycja') {
 
    		echo "<TR>";
 		echo "<TD>Towar biurowy</TD>";
-		echo "<TD><INPUT type='checkbox' name='fbiurowy' value='1'></TD>";
+		echo "<TD><INPUT type='checkbox' value='1' name='fBiurowy' "; 
+			if ($row['biurowy']) echo 'checked'; 
+		echo "></TD>";
 		echo "</TR>"; 
 
 		echo "<TR>";

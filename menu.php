@@ -20,9 +20,10 @@
       <ul>
        <li><a href='listaodrzuconych.php' TARGET='srodek'><span>Odrzucone</span></a></li>
        <li><a href='zamowienia.php?menu=dodaj' TARGET='srodek'><span>Dodaj</span></a></li>
-		 <li><a href='listawedycji.php' TARGET='srodek'><span>W edycji</span></a></li>
- 		 <li><a href='listadoakceptacji.php' TARGET='srodek'><span>Do akceptacji</span></a></li>
+  		 <li><a href='listawedycji.php' TARGET='srodek'><span>W edycji</span></a></li>
+   		 <li><a href='listadoakceptacji.php' TARGET='srodek'><span>Do akceptacji</span></a></li>
        <li><a href='listadorealizacji.php' TARGET='srodek'><span>Do realizacji</span></a></li>
+       <li><a href='listBiurowychDoRealizacji.php' TARGET='srodek'><span>Do realizacji biurowe</span></a></li>
        <li class='last'><a href='listazrealizowanych.php' TARGET='srodek'><span>Zrealizowane</span></a></li>
       </ul>
    </li>
