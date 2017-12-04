@@ -92,6 +92,20 @@ function getZamowienie($link, $idZam){
 	return $row;
 }
 
+function getZamowienieBiuroweDoRealizacji($link){
+	$sql = "SELECT z.IdZamowienia, p.Imie, p.Nazwisko, z.Data, t.nazwa, zt.Ilosc FROM `zamowienia` z 
+		join  zamowieniatow zt on z.IdZamowienia = zt.IdZam
+		join towary t on zt.Towar = t.Id
+		join personel p on z.Zamawiajacy = p.id
+		where t.biurowy = true and
+		z.StatusReal = '0'
+		and akcPrez <> '0' ";
+	$result = mysqli_query($link, $sql);
+	$row = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
+	return $row;
+}
+
 function getZamowienia($link, $warunek = ""){
 	$warunek =  ($warunek != "") ? " WHERE " . $warunek : "";
 	$sql = "SELECT zm.IdZamowienia, zm.StatusZatw, zm.Data, zm.akcKier, zm.akcZam, 

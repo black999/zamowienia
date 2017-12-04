@@ -15,7 +15,7 @@
 		<?php
 		session_start();
 		require_once 'nazwadb.inc.php';
-		require 'funkcje.php';
+		require 'core/funkcje.php';
 		$link = polaczZBaza($host, $uzytkownik, $haslo, $nazwabazydanych);
 		
 		if (isset($_GET['menu']) && ($_GET['menu'] == "logout")) {

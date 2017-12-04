@@ -1,6 +1,6 @@
 <?php
 	require_once 'nazwadb.inc.php';
-	require 'funkcje.php';
+	require 'core/funkcje.php';
 
 	session_start();
 	checkSesion();
