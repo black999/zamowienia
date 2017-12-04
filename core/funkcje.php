@@ -101,9 +101,11 @@ function getZamowienieBiuroweDoRealizacji($link){
 		z.StatusReal = '0'
 		and akcPrez <> '0' ";
 	$result = mysqli_query($link, $sql);
-	$row = mysqli_fetch_all($result, MYSQLI_ASSOC);
-
-	return $row;
+	while ($row = $result->fetch_assoc()) {
+	    $rows[] = $row;
+	}
+	
+	return $rows;
 }
 
 function getZamowienia($link, $warunek = ""){
