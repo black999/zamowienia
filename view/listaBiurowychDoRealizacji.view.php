@@ -11,7 +11,7 @@
 </head>
 <body>
 <?php if ($_SESSION['srealBiuro'] != 1)  {
-	echo "<H1>Brak uprawnień</h1>";
+	echo "<H2>Brak uprawnień</h2>";
 	exit();
 } ?>
 
