@@ -69,6 +69,9 @@
 
 <script>
 $(document).ready(function() {
+	$('.dial').on('click', 'button', function() {
+		$('.dial').hide();
+	});
 	$('button').on('click', function() {
 		var id = $(this).data('id');
 		$.ajax({
@@ -82,7 +85,7 @@ $(document).ready(function() {
 	            //atrybut ret zawiera dane zwrócone z serwera
 	            // alert("zapytanie zakonczone sukcesem "+ret);
 	            $('.dial').html(ret);
-	            $('.dial').toggle();
+	            $('.dial').show();
 	        },
             error: function(jqXHR, errorText, errorThrown) {
             	alert(errorText);

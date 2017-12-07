@@ -28,7 +28,7 @@
 		<span class='text'>Zamównienie z dnia :</span>
 		<span class='dane'><?= $fData ?></span>
 		<span class='text'>Zamawiający :</span>
-		<span class='dane'><?= $sImie . " " . $sNazwisko ?></span>
+		<span class='dane'><?= $zamowienie['Imie'] . " " . $zamowienie['Nazwisko'] ?></span>
 		<span class='text'>Wartość zamówienia : </span>
 		<span class='dane'><?= $wartoscZam ?> zł</span>
 	</DIV>
@@ -64,3 +64,5 @@
 		</tr>
 	</TABLE>
 </div>	
+<br>
+<button class="exit">Zamknij</button>

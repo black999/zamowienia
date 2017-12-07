@@ -1,7 +1,7 @@
 .dial {
     background: rgb(240, 240, 240);
     /* cień pod oknem */
-    box-shadow:1px 1px 5px #555;
+    box-shadow:10px 10px 20px #555;
     display:none;
     /*top:30px;*/
     z-index:1;
