@@ -20,7 +20,8 @@ dodano pola dataKier, dataZam, dataKsie, dataPrez do tabeli zamowienia
 dodanie pola biurowy do tabeli typ boolean domyślnie false - wprowadzone 04.12.2017
 
 07.12.2017
-dodanie pola realBiuro do tabeli personel jako realizator zamowien biurowych
+dodanie pola realBiuro do tabeli personel jako realizator zamowien biurowych - wprowadzone 07.12.2017
+
 
 
 
