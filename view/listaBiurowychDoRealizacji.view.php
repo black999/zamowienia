@@ -1,12 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="css/select2.css">
-    <link rel="stylesheet" href="css/styles.css">
-    <script type="text/javascript" src="script/jquery.js"></script>
-    <script type="text/javascript" src="script/select2.js"></script>
+	<?php require ("view/naglowek.view.php"); ?>
 	<title>Lista zamowień biurowych do realizacji</title>
 </head>
 <body>
