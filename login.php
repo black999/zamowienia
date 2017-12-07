@@ -46,6 +46,7 @@
 					$_SESSION['sNazwisko'] = $wiersz['Nazwisko'];
 					$_SESSION['sId'] = $wiersz['id'];
 					$_SESSION['sIdDzial'] = $wiersz['Dzial'];
+					$_SESSION['srealBiuro'] = $wiersz['realBiuro'];
 					// uprawnienia wyciagamy w odwrotnej kolejności niż w bazie aby pracownik mial najnizsze 000001
 					$_SESSION['sUpr'] = bindec($wiersz['uAdmin'].$wiersz['uPrez'].$wiersz['uKsieg'].$wiersz['uZampub'].$wiersz['uKier'].$wiersz['uPrac']);
 					$_SESSION["loginTime"] = time();

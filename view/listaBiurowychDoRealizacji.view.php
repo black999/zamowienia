@@ -10,7 +10,12 @@
 	<title>Lista zamowień biurowych do realizacji</title>
 </head>
 <body>
-	<div class="statusZam">
+<?php if ($_SESSION['srealBiuro'] != 1)  {
+	echo "<H1>Brak uprawnień</h1>";
+	exit();
+} ?>
+
+<div class="statusZam">
 	<?= $tytul ?>
 </div>
 

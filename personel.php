@@ -1,12 +1,13 @@
 <!doctype html>
 <html lang='pl'>
 <head>
-   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-   <meta name="viewport" content="width=device-width, initial-scale=1">
-   <link rel="stylesheet" href="css/styles.css">
-   <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
-   <script src="script/script.js"></script>
-   <title></title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/select2.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <script type="text/javascript" src="script/jquery.js"></script>
+    <script type="text/javascript" src="script/select2.js"></script>
+   	<title></title>
 </head>
 <body>
 <?php
@@ -40,6 +41,7 @@ if  (($_GET['menu']) == 'dodaj') {
 		isset($_POST['fuZampub']) ? $fuZampub = $_POST['fuZampub'] : $fuZampub = '0';
 		isset($_POST['fuKsieg']) ? $fuKsieg = $_POST['fuKsieg'] : $fuKsieg = '0';
 		isset($_POST['fuPrez']) ? $fuPrez = $_POST['fuPrez'] : $fuPrez = '0';
+		isset($_POST['frealBiuro']) ? $frealBiuro = $_POST['frealBiuro'] : $frealBiuro = '0';
 		isset($_POST['fuAdmin']) ? $fuAdmin = $_POST['fuAdmin'] : $fuAdmin = '0';
 		$query = "SELECT IdDzial from dzialy WHERE nazwa='$fDzial'";
 		$result = mysqli_query($link, $query);
@@ -47,8 +49,7 @@ if  (($_GET['menu']) == 'dodaj') {
 		$fIdDzial = $row['IdDzial'];
 		//mysqli_free_result($result);
 		$query = "INSERT INTO personel VALUES 
-		(NULL, '$fImie', '$fNazwisko', '$femail', '$fLogin','$fHaslo','$fIdDzial', '$fuPrac', '$fuKier', '$fuZampub', '$fuKsieg', '$fuPrez', '$fuAdmin')";
-		//echo "'$fImie', '$fNazwisko', '$femail', '$fLogin','$fHaslo','$fIdDzial', $fuPrac, $fuKier, $fuKsieg, $fuPrez, $fuAdmin, $fuZampub";
+		(NULL, '$fImie', '$fNazwisko', '$femail', '$fLogin','$fHaslo','$fIdDzial', '$fuPrac', '$fuKier', '$fuZampub', '$fuKsieg', '$fuPrez', '$fuAdmin', '$frealBiuro')";
 		mysqli_query($link, $query) or die ("Jakiś błąd" . mysqli_error($link));
 	}
 
@@ -121,7 +122,12 @@ if  (($_GET['menu']) == 'dodaj') {
 		echo "<TR>";
 		echo "<TD><INPUT type='checkbox' value='1' name='fuPrez'></TD>";
 		echo "<TD>prezes</TD>";
-		echo "</TR>";			
+		echo "</TR>";		
+
+		echo "<TR>";
+		echo "<TD><INPUT type='checkbox' value='1' name='frealBiuro'></TD>";
+		echo "<TD>realizacja zamóweiń biurowych</TD>";
+		echo "</TR>";		
 		
 		echo "<TR>";
 		echo "<TD><INPUT type='checkbox' value='1' name='fuAdmin'></TD>";
@@ -139,7 +145,8 @@ if  (($_GET['menu']) == 'dodaj') {
 		echo "<div class='lista'>";  //odczytanie danych
 			//if (!(isset($_POST['fNazwisko']))) $_POST['fNazwisko'] = '';
 			$sql = "SELECT p.id, p.Imie, p.Nazwisko, p.Login, d.Nazwa, 
-				CONCAT(p.uAdmin, p.uPrez, p.uKsieg, p.uZampub, p.uKier, p.uPrac) as upr
+				CONCAT(p.uAdmin, p.uPrez, p.uKsieg, p.uZampub, p.uKier, p.uPrac) as upr,
+				p.realBiuro
 				FROM personel p, dzialy d where p.Dzial = d.IdDzial ORDER BY p.id DESC";
 
 			$result = mysqli_query($link, $sql);
@@ -153,6 +160,7 @@ if  (($_GET['menu']) == 'dodaj') {
 						<TH>Login</TH>
 						<TH>Dział</TH>
 						<TH>Uprawnienia</TH>
+						<TH>Real. biurowych</TH>
 						<TH>Opcje</TH>
 					</TR>";
 			while($row = mysqli_fetch_assoc($result)) {
@@ -164,6 +172,7 @@ if  (($_GET['menu']) == 'dodaj') {
 				//echo "<TD style='width: 100px;'>" . $row["Haslo"]. "</TD>";
 				echo "<TD>" . $row["Nazwa"]. "</TD>";
 				echo "<TD>" . $row["upr"] . "</TD>";
+				echo "<TD>" . $row["realBiuro"] . "</TD>";
 				echo "<TD><a href='personel.php?menu=edycja&id=" .$row["id"]. "'> Edycja</TD>";
 				echo "</TR>";
 			}
@@ -190,7 +199,8 @@ if  (($_GET['menu']) == 'lista') {
 		echo "<div class='lista'>";  //odczytanie danych personelu
 			if (!(isset($_POST['fNazwisko']))) $_POST['fNazwisko'] = ''; //uprawnienie wyciagamy w odwrotnej kolejnosci aby pracownik mial najnizsze 00001
 			$sql = "SELECT p.id, p.Imie, p.Nazwisko, p.Login, d.Nazwa,
-					CONCAT(p.uAdmin, p.uPrez, p.uKsieg, p.uZampub, p.uKier, p.uPrac) as upr  
+					CONCAT(p.uAdmin, p.uPrez, p.uKsieg, p.uZampub, p.uKier, p.uPrac) as upr,
+					p.realBiuro
 					FROM personel p
 					inner join dzialy d ON p.Dzial = d.IdDzial
 					where p.Nazwisko LIKE '%" . $_POST['fNazwisko'] . "%'
@@ -204,6 +214,7 @@ if  (($_GET['menu']) == 'lista') {
 						<TH>Imię</TH>
 						<TH>Login</TH>
 						<TH>Uprawnienia</TH>
+						<TH>Real. biurowych</TH>
 						<TH>Opcje</TH>
 					</TR>";
 			while($row = mysqli_fetch_assoc($result)) {
@@ -214,6 +225,7 @@ if  (($_GET['menu']) == 'lista') {
 				echo "<TD style='width: 100px;'>" . $row["Login"]. "</TD>";
 				//echo "<TD style='width: 100px;'>" . $row["Haslo"]. "</TD>";
 				echo "<TD>" . $row["upr"] . "</TD>";
+				echo "<TD>" . $row["realBiuro"] . "</TD>";
 				echo "<TD><a href='personel.php?menu=edycja&id=" .$row["id"]. "'>Edycja</TD>";
 				echo "</TR>";
 			}
@@ -237,6 +249,7 @@ if  (($_GET['menu']) == 'edycja') {
 			isset($_POST['fuZampub']) ? $fuZampub = $_POST['fuZampub'] : $fuZampub = '0';
 			isset($_POST['fuKsieg']) ? $fuKsieg = $_POST['fuKsieg'] : $fuKsieg = '0';
 			isset($_POST['fuPrez']) ? $fuPrez = $_POST['fuPrez'] : $fuPrez = '0';
+ 			isset($_POST['frealBiuro']) ? $frealBiuro = $_POST['frealBiuro'] : $frealBiuro = '0';
 			isset($_POST['fuAdmin']) ? $fuAdmin = $_POST['fuAdmin'] : $fuAdmin = '0';
 			//$query = "SELECT IdDzial from dzialy WHERE nazwa='$fDzial'";
 			//$result = mysqli_query($link, $query);
@@ -255,7 +268,8 @@ if  (($_GET['menu']) == 'edycja') {
 				uZampub='$fuZampub',
 				uKsieg='$fuKsieg',
 				uPrez='$fuPrez',
-				uAdmin='$fuAdmin'
+				uAdmin='$fuAdmin',
+				realBiuro='$frealBiuro'
 				WHERE id='$id'";
 			mysqli_query($link, $query) or die ("Jakiś błąd" . mysqli_error($link));
 			header("Location: personel.php?menu=lista");
@@ -342,11 +356,19 @@ if  (($_GET['menu']) == 'edycja') {
 		echo "</TR>";			
 		
 		echo "<TR>";
+		echo "<TD><INPUT type='checkbox' value='1' name='frealBiuro'";
+		if ($row['realBiuro'] == '1') echo " checked";
+		echo "></TD>";
+		echo "<TD>realizacja zamówień biurowych</TD>";
+		echo "</TR>";
+		
+		echo "<TR>";
 		echo "<TD><INPUT type='checkbox' value='1' name='fuAdmin'";
 		if ($row['uAdmin'] == '1') echo " checked";
 		echo "></TD>";
 		echo "<TD>administrator</TD>";
 		echo "</TR>";
+
 		
 		echo "<TR>";
 		echo "<TD colspan='2' align='right'><INPUT type='SUBMIT' value='    POPRAW   '></TD>";
