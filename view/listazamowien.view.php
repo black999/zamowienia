@@ -7,7 +7,8 @@
     <script src="script/jquery.js" type="text/javascript"></script>
    	<script src="script/dataTable.js" type="text/javascript"></script>
    	 <link rel="stylesheet" href="css/dataTable.css">
-	<title>Lista zamowień odrzuconych</title>
+   	 <link rel="stylesheet" href="css/okno.css">
+	<title>Lista zamowień</title>
 </head>
 <body>
 
@@ -24,6 +25,8 @@
 </div>
 
 <br>
+
+<div class="dial"></div>
 
 <div class="lista">
 	<table id="tabela1" style="width: 90%">
@@ -53,14 +56,42 @@
 				<td class="akceptacja"><?php if($zamowienie->akcKsie != '0') echo "+" ?></td>
 				<td class="akceptacja"><?php if($zamowienie->akcPrez != '0') echo "+" ?></td>
 				<td class="money"><?= $zamowienie->wartosc . " zł " ?></td>
-				<td class="money"><a href="szczegolyzam.php?fIdzam=<?= $zamowienie->IdZamowienia ?>"> Szczegóły</a></td>
+				<?php if (isset($widok) && $widok == 'okno') : ?>
+					<td class="money"><button data-id="<?= $zamowienie->IdZamowienia ?>"> Szczegóły</button></td>
+				<?php else : ?>
+					<td class="money"><button data-id="<?= $zamowienie->IdZamowienia ?>"> Szczegóły</button></td>
+				<?php endif ?>
 			</tr>
 		<?php endforeach ; ?>
 		</tbody>
 	</table>
 </div>
+
 <script>
 $(document).ready(function() {
+	$('button').on('click', function() {
+		var id = $(this).data('id');
+		$.ajax({
+	        type     : "POST",
+	        url      : "ajax/szczegolyZamowienia.php",
+	        data     : {
+	            idzam : id,
+	        },
+	        success: function(ret) {
+	            //ten fragment wykona się po pomyślnym zakończeniu połączenia - gdy dostaliśmy odpowiedź od serwera nie będącą błędem (404, 400, 500 itp)
+	            //atrybut ret zawiera dane zwrócone z serwera
+	            // alert("zapytanie zakonczone sukcesem "+ret);
+	            $('.dial').html(ret);
+	            $('.dial').toggle();
+	        },
+            error: function(jqXHR, errorText, errorThrown) {
+            	alert(errorText);
+                //ten fragment wykona się w przypadku BŁĘDU
+                //do zmiennej errorText zostanie przekazany błąd
+            }
+	    });
+	});
+
 	$("#tabela1").DataTable( {
 		"lengthMenu": [ [ 20, 50, 75, 100, -1 ], [ 20, 50, 75, 100, "All" ] ],
         "order": [ 0, 'desc' ],
