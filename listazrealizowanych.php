@@ -20,5 +20,6 @@
 	}
 
 	$tytul = 'Lista zamówień zrealizowanych';
+	$widok = 'okno';
 
 	include ('view/listazamowien.view.php');	

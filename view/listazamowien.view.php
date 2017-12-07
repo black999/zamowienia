@@ -59,7 +59,7 @@
 				<?php if (isset($widok) && $widok == 'okno') : ?>
 					<td class="money"><button data-id="<?= $zamowienie->IdZamowienia ?>"> Szczegóły</button></td>
 				<?php else : ?>
-					<td class="money"><button data-id="<?= $zamowienie->IdZamowienia ?>"> Szczegóły</button></td>
+					<td class="money"><a href="szczegolyzam.php?fIdzam=<?= $zamowienie->IdZamowienia ?>"> Szczegóły</a></td>
 				<?php endif ?>
 			</tr>
 		<?php endforeach ; ?>
