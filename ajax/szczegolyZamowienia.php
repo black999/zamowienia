@@ -55,6 +55,9 @@
     		<td colspan="3"></td><td class='suma'>RAZEM :</td><td class='suma'><?= $wartoscZam . " zł" ?></td>
     	</tr>
     	<tr>
+    		
+    	</tr>
+    	<tr>
 			<th colspan="5">Koszt realizacji</th>
 		</tr>
 		<tr>
@@ -65,4 +68,4 @@
 	</TABLE>
 </div>	
 <br>
-<button class="exit">Zamknij</button>
+<button class="button exit">Zamknij</button>

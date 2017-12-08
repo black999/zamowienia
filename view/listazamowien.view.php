@@ -70,7 +70,7 @@
 <script>
 $(document).ready(function() {
 	$('.dial').on('click', 'button', function() {
-		$('.dial').hide();
+		$('.dial').fadeOut('slow');
 	});
 	$('button').on('click', function() {
 		var id = $(this).data('id');
@@ -85,7 +85,7 @@ $(document).ready(function() {
 	            //atrybut ret zawiera dane zwrócone z serwera
 	            // alert("zapytanie zakonczone sukcesem "+ret);
 	            $('.dial').html(ret);
-	            $('.dial').show();
+	            $('.dial').fadeIn('slow');
 	        },
             error: function(jqXHR, errorText, errorThrown) {
             	alert(errorText);
