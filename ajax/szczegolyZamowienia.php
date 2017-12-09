@@ -5,12 +5,6 @@
 	session_start();
 	checkSesion();
 
-	$sNazwisko = $_SESSION['sNazwisko'];
-	$sImie = $_SESSION['sImie'];
-	$sId = $_SESSION['sId'];
-	$sUpr = $_SESSION['sUpr'];
-	$sIdDzial = $_SESSION['sIdDzial'];
-
 	$link = polaczZBaza($host, $uzytkownik, $haslo, $nazwabazydanych);
 
 	$wartoscZam = OblWartZam($_POST['idzam'], $link); // wyliczanie wartosci zamownienia
@@ -26,11 +20,11 @@
 
  	<DIV class='listwaZam'>
 		<span class='text'>Zamównienie z dnia :</span>
-		<span class='dane'><?= $fData ?></span>
+		<span class='dane' style="width: 90px"><?= $fData ?></span>
 		<span class='text'>Zamawiający :</span>
 		<span class='dane'><?= $zamowienie['Imie'] . " " . $zamowienie['Nazwisko'] ?></span>
 		<span class='text'>Wartość zamówienia : </span>
-		<span class='dane'><?= $wartoscZam ?> zł</span>
+		<span class='dane' style="width: 80px"><?= $wartoscZam ?> zł</span>
 	</DIV>
 	<br>
 	<div class='lista'>

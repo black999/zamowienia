@@ -5,9 +5,9 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="css/styles.css">
     <script src="script/jquery.js" type="text/javascript"></script>
-   	<script src="script/dataTable.js" type="text/javascript"></script>
-   	 <link rel="stylesheet" href="css/dataTable.css">
-   	 <link rel="stylesheet" href="css/okno.css">
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.16/datatables.min.css"/>
+	<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.16/datatables.min.js"></script>
+	<link rel="stylesheet" href="css/okno.css">
 	<title>Lista zamowień</title>
 </head>
 <body>
@@ -85,7 +85,7 @@ $(document).ready(function() {
 	            //atrybut ret zawiera dane zwrócone z serwera
 	            // alert("zapytanie zakonczone sukcesem "+ret);
 	            $('.dial').html(ret);
-	            $('.dial').fadeIn('slow');
+	            $('.dial').fadeIn('fast');
 	        },
             error: function(jqXHR, errorText, errorThrown) {
             	alert(errorText);
