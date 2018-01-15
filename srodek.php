@@ -1,5 +1,15 @@
 ﻿<?php 
+   require_once 'nazwadb.inc.php';
+   require 'core/funkcje.php';
 	session_start();
+   $link = polaczZBaza($host, $uzytkownik, $haslo, $nazwabazydanych);
+   $dzial = getDzialById($link, $_SESSION['sIdDzial']);
+   $warunek = "StatusZatw = 0 AND p.id = {$_SESSION['sId']}";
+   $wEdycji = getZamowienia($link, $warunek);
+   $warunek2 = getWarunekByUprawnienia($_SESSION['sUpr']);
+   $doAkceptacji = getZamowienia($link, $warunek2); 
+
+
 ?>
 <html>
 <head>
@@ -17,9 +27,101 @@
 	Program do obsługi zamówień<br>
 	wersja 1.1<br>
 </div>
+<div class="formatka">
+   <p>Zalogowany : <b><?= $_SESSION['sNazwisko'] ?> <?=$_SESSION['sImie'] ?></b></p>
+   <p>Dział : <b><?= $dzial->Nazwa ?></b></p>
+   <hr>
+</div>
+<?php if ($wEdycji) : ?>
+   <div class="formatka">
+      <h3>Lista zamówień w edycji</h3>
+      <div class="lista">
+         <table id="tabela1" style="width: 90%">
+            <thead>
+            <tr>
+               <th>Data zam.</th>
+               <th>Zamawiający</th>
+               <th>Dział</th>
+               <!-- <th>Stat. Realizacji</th> -->
+               <th>Kier</th>
+               <th>Zam. Pub</th>
+               <th>Księg</th>
+               <th>Prezes</th>
+               <th class="money">Wartość</th>
+               <th class="money">Opcje</th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php foreach ($wEdycji as $zamowienie) : ?>
+               <tr>
+                  <td><?= $zamowienie->Data ?></td>
+                  <td><?= $zamowienie->Imie . " ". $zamowienie->Nazwisko ?></td>
+                  <td><?= $zamowienie->Dzial ?></td>
+                  <!-- <td><?= $zamowienie->StatusReal ?></td> -->
+                  <td class="akceptacja"><?php if($zamowienie->akcKier != '0') echo "+" ?></td>
+                  <td class="akceptacja"><?php if($zamowienie->akcZam != '0') echo "+" ?></td>
+                  <td class="akceptacja"><?php if($zamowienie->akcKsie != '0') echo "+" ?></td>
+                  <td class="akceptacja"><?php if($zamowienie->akcPrez != '0') echo "+" ?></td>
+                  <td class="money"><?= $zamowienie->wartosc . " zł " ?></td>
+                  <?php if (isset($widok) && $widok == 'okno') : ?>
+                     <td class="money"><button data-id="<?= $zamowienie->IdZamowienia ?>"> Szczegóły</button></td>
+                  <?php else : ?>
+                     <td class="money"><a href="szczegolyzam.php?fIdzam=<?= $zamowienie->IdZamowienia ?>"> Szczegóły</a></td>
+                  <?php endif ?>
+               </tr>
+            <?php endforeach ; ?>
+            </tbody>
+         </table>
+      </div>
+      <hr><br>
+   </div>
+<?php endif ; ?>
+<?php if ($doAkceptacji) : ?>
+   <div class="formatka">
+      <h3>Lista zamówień do akceptacji</h3>
+      <div class="lista">
+         <table id="tabela1" style="width: 90%">
+            <thead>
+            <tr>
+               <th>Data zam.</th>
+               <th>Zamawiający</th>
+               <th>Dział</th>
+               <!-- <th>Stat. Realizacji</th> -->
+               <th>Kier</th>
+               <th>Zam. Pub</th>
+               <th>Księg</th>
+               <th>Prezes</th>
+               <th class="money">Wartość</th>
+               <th class="money">Opcje</th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php foreach ($doAkceptacji as $zamowienie) : ?>
+               <tr>
+                  <td><?= $zamowienie->Data ?></td>
+                  <td><?= $zamowienie->Imie . " ". $zamowienie->Nazwisko ?></td>
+                  <td><?= $zamowienie->Dzial ?></td>
+                  <!-- <td><?= $zamowienie->StatusReal ?></td> -->
+                  <td class="akceptacja"><?php if($zamowienie->akcKier != '0') echo "+" ?></td>
+                  <td class="akceptacja"><?php if($zamowienie->akcZam != '0') echo "+" ?></td>
+                  <td class="akceptacja"><?php if($zamowienie->akcKsie != '0') echo "+" ?></td>
+                  <td class="akceptacja"><?php if($zamowienie->akcPrez != '0') echo "+" ?></td>
+                  <td class="money"><?= $zamowienie->wartosc . " zł " ?></td>
+                  <?php if (isset($widok) && $widok == 'okno') : ?>
+                     <td class="money"><button data-id="<?= $zamowienie->IdZamowienia ?>"> Szczegóły</button></td>
+                  <?php else : ?>
+                     <td class="money"><a href="szczegolyzam.php?fIdzam=<?= $zamowienie->IdZamowienia ?>"> Szczegóły</a></td>
+                  <?php endif ?>
+               </tr>
+            <?php endforeach ; ?>
+            </tbody>
+         </table>
+      </div>
+      <hr>
+   </div>
+<?php endif ; ?>
 
 
 
-</dir>
 </body>
 </html>

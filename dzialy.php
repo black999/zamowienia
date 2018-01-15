@@ -22,7 +22,7 @@ if ($_SESSION['sUpr'] == 1) {
 	exit();
 }
 
-$link = mysqli_connect($host, $uzytkownik, $haslo, $nazwabazydanych);
+$link = polaczZBaza($host, $uzytkownik, $haslo, $nazwabazydanych);
 if (!$link) {
 	echo "Error: Unable to connect to MySQL." . PHP_EOL;
 	echo "Debugging errno: " . mysqli_connect_errno() . PHP_EOL;

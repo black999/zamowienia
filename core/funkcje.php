@@ -184,3 +184,49 @@ function updateKosztZamowienia($link, $Idzam, $kosztOpis, $koszt) {
 	$sql= "UPDATE zamowienia SET koszt = '{$koszt}', kosztOpis = '{$kosztOpis}' WHERE IdZamowienia = {$Idzam}";	
 	mysqli_query($link, $sql);
 }
+
+function getDzialById($link, $id){
+	$sql = "Select * from dzialy where dzialy.idDzial = '{$id}'";
+	$result = mysqli_query($link, $sql);
+	return mysqli_fetch_object($result);
+}
+
+function getWarunekByUprawnienia($sUpr) {
+	$pracownik = (($sUpr & 1) == '1') ? TRUE : FALSE;
+	if ($sUpr == 1) { // jeśli tylko pracownik 
+		$warunek = "StatusZatw = 1 AND StatusReal = 0 AND akcPrez = 0 AND p.id = {$sId}"; // StatusZatw = 1 - zamowienia zatwierdzone
+	}
+	if ($sUpr > 1 && $sUpr < 4) { // jeśli tylko kierownik
+		if ($pracownik){   //jesli jednoczesnie pracownik to wyświetlamy wszystkie zmownienia łącznie z naszymi akceptacjami
+			// StatusZatw = 1 - zamowienia zatwierdzone
+			// ((Dzial = {$sIdDzial} AND akcKier = 0) - zlecenie nie zatwierdzone przez kierwonika i z działu kierownika
+			// (akcKier !=0 and p.id = {$sId}) - zlecenia zatwierdzone przez kierwonika i należące do niego samego
+			$warunek = "StatusZatw = 1 AND StatusReal = 0 AND akcPrez = 0 AND 
+						((Dzial = {$sIdDzial} AND akcKier = 0) OR 
+						(akcKier <> 0 and p.id = {$sId}))"; 
+		} else {
+			$warunek = "StatusZatw = 1 AND StatusReal = 0 AND Dzial = {$sIdDzial} AND akcKier = 0"; // StatusZatw = 1 - zamowienia zatwierdzone
+		}
+	}
+	if ($sUpr >= 4) { // jeśli więcej niż kierownik
+		$warunekOR = "";
+		$warunek = "StatusZatw = 1 AND StatusReal = 0 AND akcPrez = 0 ";
+		if (($sUpr & 16 ) == 16) {
+			$warunekOR = "akcKier != 0"; // aby prezes mógł akceptować musi być akceptacja kierwonika
+		}
+		if (($sUpr & 8 ) == 8) {
+			if (!$pracownik) {
+				$warunekOR = (!isset($warunekOR)) ? "akcKsie = 0": " {$warunekOR} OR akcKsie = 0" ; // StatusZatw = 1 - zamowienia zatwierdzone
+			}
+		}
+		if (($sUpr & 4 ) == 4) {
+			if (!$pracownik) {
+				$warunekOR = (!isset($warunekOR)) ? "akcZam = 0" : " {$warunekOR} OR akcZam = 0"; // StatusZatw = 1 - zamowienia zatwierdzone
+			}
+		}
+		if ($warunekOR != "") {
+			$warunek = $warunek . " AND ( " . $warunekOR . " )";
+		}
+	}
+	return $warunek;
+}
