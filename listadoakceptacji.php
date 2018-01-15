@@ -12,7 +12,7 @@
 	$sUpr = $_SESSION['sUpr'];
 	$sIdDzial = $_SESSION['sIdDzial'];
 	$link = polaczZBaza($host, $uzytkownik, $haslo, $nazwabazydanych);
-	$warunek = getWarunekByUprawnienia($sUpr);
+	$warunek = getWarunekByUprawnienia($sUpr, $sId, $sIdDzial);
 	$zamowieniaAll = getZamowienia($link, $warunek); 
 
 	if (!$zamowieniaAll) {

@@ -6,7 +6,7 @@
    $dzial = getDzialById($link, $_SESSION['sIdDzial']);
    $warunek = "StatusZatw = 0 AND p.id = {$_SESSION['sId']}";
    $wEdycji = getZamowienia($link, $warunek);
-   $warunek2 = getWarunekByUprawnienia($_SESSION['sUpr']);
+   $warunek2 = getWarunekByUprawnienia($_SESSION['sUpr'], $_SESSION['sId'], $_SESSION['sIdDzial']);
    $doAkceptacji = getZamowienia($link, $warunek2); 
 
 

@@ -191,7 +191,7 @@ function getDzialById($link, $id){
 	return mysqli_fetch_object($result);
 }
 
-function getWarunekByUprawnienia($sUpr) {
+function getWarunekByUprawnienia($sUpr, $sId, $sIdDzial) {
 	$sUpr = ($sUpr & 31);  //filturjemy wszystkie uprawnienia bez uprawnie administratora 011111
 	$pracownik = (($sUpr & 1) == '1') ? TRUE : FALSE;
 	if ($sUpr == 1) { // jeśli tylko pracownik 
