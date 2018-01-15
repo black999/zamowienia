@@ -11,10 +11,6 @@
 	$sId = $_SESSION['sId'];
 	$sUpr = $_SESSION['sUpr'];
 	$sIdDzial = $_SESSION['sIdDzial'];
-
-	$sUpr = ($sUpr & 31);  //filturjemy wszystkie uprawnienia bez uprawnie administratora 011111
-	
-
 	$link = polaczZBaza($host, $uzytkownik, $haslo, $nazwabazydanych);
 	$warunek = getWarunekByUprawnienia($sUpr);
 	$zamowieniaAll = getZamowienia($link, $warunek); 

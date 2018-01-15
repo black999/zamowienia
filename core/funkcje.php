@@ -192,6 +192,7 @@ function getDzialById($link, $id){
 }
 
 function getWarunekByUprawnienia($sUpr) {
+	$sUpr = ($sUpr & 31);  //filturjemy wszystkie uprawnienia bez uprawnie administratora 011111
 	$pracownik = (($sUpr & 1) == '1') ? TRUE : FALSE;
 	if ($sUpr == 1) { // jeśli tylko pracownik 
 		$warunek = "StatusZatw = 1 AND StatusReal = 0 AND akcPrez = 0 AND p.id = {$sId}"; // StatusZatw = 1 - zamowienia zatwierdzone
