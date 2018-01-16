@@ -33,10 +33,10 @@
    <hr>
 </div>
 <?php if ($wEdycji) : ?>
-   <div class="formatka">
+   <div class="formatka okno">
       <h3>Lista zamówień w edycji</h3>
       <div class="lista">
-         <table id="tabela1" style="width: 90%">
+         <table id="tabela1">
             <thead>
             <tr>
                <th>Data zam.</th>
@@ -73,14 +73,13 @@
             </tbody>
          </table>
       </div>
-      <hr><br>
    </div>
 <?php endif ; ?>
 <?php if ($doAkceptacji) : ?>
-   <div class="formatka">
+   <div class="formatka okno">
       <h3>Lista zamówień do akceptacji</h3>
       <div class="lista">
-         <table id="tabela1" style="width: 90%">
+         <table id="tabela1" >
             <thead>
             <tr>
                <th>Data zam.</th>
@@ -117,7 +116,6 @@
             </tbody>
          </table>
       </div>
-      <hr>
    </div>
 <?php endif ; ?>
 

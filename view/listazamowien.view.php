@@ -29,7 +29,7 @@
 <div class="dial"></div>
 
 <div class="lista">
-	<table id="tabela1" style="width: 90%">
+	<table id="tabela1" >
 		<thead>
 		<tr>
 			<th>Data zam.</th>

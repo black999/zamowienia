@@ -217,7 +217,7 @@ input[type=text] {
   font-weight: bold;
 }
 .lista table {
-	width: 90%;
+	width: 100%;
 }
 .lista td.opcje, .lista th.opcje {
 	text-align: center;
@@ -347,4 +347,15 @@ a.button{
 .select2-selection__rendered {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 14px;
+}
+
+.okno {
+  background: #ededed;
+  padding-left:  4px;
+  padding-right:   4px;
+  margin-bottom: 6px;
+  margin-top: 6px;
+  border-radius: 4px;
+  border: 1px solid; 
+  border-color: grey;
 }
