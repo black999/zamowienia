@@ -1,0 +1,19 @@
+test
+
+# --------------
+# Please enter the commit message for your changes. Everything below
+# this paragraph is ignored, and an empty message aborts the commit.
+# Just close the window to accept your message.
+diff --git a/css/login.css b/css/login.css
+index 4529363..399543c 100644
+--- a/css/login.css
++++ b/css/login.css
+@@ -3,7 +3,7 @@
+ .center {width: 900px; margin: 0 auto; margin-top: 150px;}		
+ 
+ #panel {
+-	/*test jakis tam*/
++	/*test jakis tam jeszcze jeden*/
+ 	width: 400px; 
+ 	margin: 0 auto; 
+ 	padding: 0;
