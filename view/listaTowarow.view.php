@@ -26,7 +26,7 @@
 				 <TD class='opcje'>
 				 	<small>
 				 	<a href='towary.php?menu=edycja&id=<?= $towar["id"] ?>'><span>Edycja</span></a>
-				 	<a href="#"><span>Zam</span></a>
+				 	<a href='listaZamWgTowarow.php?id=<?= $towar["id"] ?>'><span>Zam</span></a>
 				 	</small>
 				 </TD>
 			 </TR>

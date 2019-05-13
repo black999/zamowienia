@@ -111,7 +111,8 @@ function getZamowienieBiuroweDoRealizacji($link){
 function getZamowienia($link, $warunek = ""){
 	$warunek =  ($warunek != "") ? " WHERE " . $warunek : "";
 	$sql = "SELECT zm.IdZamowienia, zm.StatusZatw, zm.Data, zm.akcKier, zm.akcZam, 
-					zm.akcKsie, zm.akcPrez, zm.StatusReal, zm.Info, p.Imie, p.Nazwisko, d.Nazwa as Dzial,
+					zm.akcKsie, zm.akcPrez, zm.StatusReal, zm.Info, p.Imie, p.Nazwisko, t.nazwa,
+					d.Nazwa as Dzial,
 					sum(zt.Ilosc*t.cenaZak) as wartosc
 			from zamowienia zm
 			inner join personel p on zm.Zamawiajacy = p.id
@@ -203,6 +204,21 @@ function getTowary($link){
 		while ($row = mysqli_fetch_assoc($result)) {
 			$wynik[] = $row;  
 		}
+		return $wynik;
+	} else {
+		return false;
+	}
+}
+
+function getTowar($link, $id){
+	$wynik = [];
+    $sql = "SELECT t.id, t.nazwa, t.cenaZak, t.uwagi, t.biurowy, t.dostawca, d.Nazwa as dzial
+    		FROM towary t
+    		LEFT JOIN dzialy d on t.IdDzial = d.IdDzial   
+    		WHERE t.id  = {$id}";
+	$result = mysqli_query($link, $sql);
+	if (mysqli_num_rows($result) > 0) {
+		$wynik = mysqli_fetch_assoc($result); 
 		return $wynik;
 	} else {
 		return false;
