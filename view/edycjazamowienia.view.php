@@ -42,7 +42,7 @@
 
 <div class="lista">
 	<form action='?menu=zapisz&fIdzam=<?= $_GET['fIdzam'] ?>' method='POST'>
-		<table style="width: 70%"">
+		<table style="width: 70%">
 			<tr>
 				<th>Nazwa</th>
 				<th>Ilość</th>

@@ -1,18 +1,13 @@
 <?php
 
-	require_once 'nazwadb.inc.php';
-	require 'core/funkcje.php';
-
-	session_start();
-	checkSesion();
-
+	require 'core/init.php';
+	
 	$sNazwisko = $_SESSION['sNazwisko'];
 	$sImie = $_SESSION['sImie'];
 	$sId = $_SESSION['sId'];
 	$sUpr = $_SESSION['sUpr'];
 	$sIdDzial = $_SESSION['sIdDzial'];
 
-	$link = polaczZBaza($host, $uzytkownik, $haslo, $nazwabazydanych);
 	$warunek = "StatusZatw = 0 AND p.id = {$sId}";
 	$zamowieniaAll = getZamowienia($link, $warunek); // 
 

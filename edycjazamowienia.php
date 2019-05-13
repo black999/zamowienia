@@ -1,17 +1,11 @@
 <?php
-	require_once 'nazwadb.inc.php';
-	require 'core/funkcje.php';
-
-	session_start();
-	checkSesion();
-
+	require 'core/init.php';
+	
 	$sNazwisko = $_SESSION['sNazwisko'];
 	$sImie = $_SESSION['sImie'];
 	$sId = $_SESSION['sId'];
 	$sUpr = $_SESSION['sUpr'];
 	$sIdDzial = $_SESSION['sIdDzial'];
-
-	$link = polaczZBaza($host, $uzytkownik, $haslo, $nazwabazydanych);
 
 	$menu = (isset($_GET['menu'])) ? $_GET['menu'] : "";
 
@@ -30,7 +24,7 @@
 				updateKosztZamowienia($link, $_GET['fIdzam'], $_POST['kosztOpis'], $_POST['koszt']);
 			}
 			if ($_POST['opcja'] == 'zapisz') {
-				$string = "Location: zamowienia.php?menu=lista&id=" . $_GET['fIdzam'];
+				// $string = "Location: zamowienia.php?menu=lista&id=" . $_GET['fIdzam'];
 				$string = "Location: szczegolyzam.php?fIdzam=" . $_GET['fIdzam'];
 				header($string);
 			}
@@ -42,7 +36,7 @@
 	}
 
 	$towaryNaZam = getTowaryNaZamowieniu($link, $_GET['fIdzam']);
-	$towary = getTowary($link, $sIdDzial);
+	$towary = getTowaryByIdDzial($link, $sIdDzial);
 	$wartoscZam = OblWartZam($_GET['fIdzam'], $link);	
 	$zamowienie = getZamowienie($link, $_GET['fIdzam']);
 	$fData = $zamowienie['Data'];

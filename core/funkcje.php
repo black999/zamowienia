@@ -160,19 +160,69 @@ function updateIlosciTowarowNaZamowieniu($link, $towary){
 
 }
  
-function getTowary ($link, $sIdDzial){
+function getTowaryByIdDzial ($link, $sIdDzial){
 	$sql = "SELECT * FROM towary
 			WHERE (IdDzial ='" . $sIdDzial . "' or IdDzial = '0')
 			ORDER BY Nazwa";
 	$result = mysqli_query($link, $sql);
 	if (mysqli_num_rows($result) > 0) {
 		while ($row = mysqli_fetch_object($result)) {
-			$wynik[$row->Id] = $row;  //wynik jest zwracany w postaci tablicy personel[id_osoby] {dane osoby jak z zapytania sql}
+			$wynik[$row->Id] = $row;  
 		}
 		return $wynik;
 	} else {
 		return false;
 	}
+}
+
+function getTowaryOstatnioDodane($link){
+	$wynik = [];
+    $sql = "SELECT t.id, t.nazwa, t.cenaZak, t.uwagi, t.biurowy, d.Nazwa as dzial
+    		FROM towary t
+    		LEFT JOIN dzialy d on t.IdDzial = d.IdDzial   
+    		ORDER BY t.id DESC LIMIT 20";
+	$result = mysqli_query($link, $sql);
+	if (mysqli_num_rows($result) > 0) {
+		while ($row = mysqli_fetch_assoc($result)) {
+			$wynik[] = $row;  
+		}
+		return $wynik;
+	} else {
+		return false;
+	}
+}
+
+function getTowary($link){
+	$wynik = [];
+    $sql = "SELECT t.id, t.nazwa, t.cenaZak, t.uwagi, t.biurowy, t.dostawca, d.Nazwa as dzial
+    		FROM towary t
+    		LEFT JOIN dzialy d on t.IdDzial = d.IdDzial   
+    		ORDER BY t.id ";
+	$result = mysqli_query($link, $sql);
+	if (mysqli_num_rows($result) > 0) {
+		while ($row = mysqli_fetch_assoc($result)) {
+			$wynik[] = $row;  
+		}
+		return $wynik;
+	} else {
+		return false;
+	}
+}
+
+function addTowar($link, $towar){
+		$fNazwaTow = $towar['fNazwaTow'];
+		$fCenaZak = str_replace(",", ".", $towar['fCenaZak']); 
+        $fDzial = $towar['fDzial'];
+		$fDostawca = $towar['fDostawca'];
+		$fUwagi = $towar['fUwagi'];
+		if (!isset($towar['fBiurowy'])){
+			$fBiurowy = '0';
+		} else {
+			$fBiurowy = $towar['fBiurowy'];
+		}
+		$query = "INSERT INTO towary VALUES (NULL, '$fDzial', '$fNazwaTow', '$fCenaZak', '$fDostawca', '$fUwagi', '$fBiurowy')";
+		//echo "dodano towary";
+		mysqli_query($link, $query) or die ("Jakiś błąd");	
 }
 
 function delTowarZZamowienia($link, $idTow){
@@ -189,6 +239,20 @@ function getDzialById($link, $id){
 	$sql = "Select * from dzialy where dzialy.idDzial = '{$id}'";
 	$result = mysqli_query($link, $sql);
 	return mysqli_fetch_object($result);
+}
+
+function getDzialy($link){
+	$wynik = [];
+	$sql = "Select * from dzialy";
+	$result = mysqli_query($link, $sql);
+	if (mysqli_num_rows($result) > 0) {
+		while ($row = mysqli_fetch_assoc($result)) {
+			$wynik[] = $row;  
+		}
+		return $wynik;
+	} else {
+		return false;
+	}
 }
 
 function getWarunekByUprawnienia($sUpr, $sId, $sIdDzial) {
@@ -231,3 +295,4 @@ function getWarunekByUprawnienia($sUpr, $sId, $sIdDzial) {
 	}
 	return $warunek;
 }
+
