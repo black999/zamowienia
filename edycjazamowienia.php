@@ -1,12 +1,6 @@
 <?php
 	require 'core/init.php';
 	
-	$sNazwisko = $_SESSION['sNazwisko'];
-	$sImie = $_SESSION['sImie'];
-	$sId = $_SESSION['sId'];
-	$sUpr = $_SESSION['sUpr'];
-	$sIdDzial = $_SESSION['sIdDzial'];
-
 	$menu = (isset($_GET['menu'])) ? $_GET['menu'] : "";
 
 	switch ($menu) {

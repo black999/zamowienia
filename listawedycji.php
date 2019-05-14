@@ -2,12 +2,6 @@
 
 	require 'core/init.php';
 	
-	$sNazwisko = $_SESSION['sNazwisko'];
-	$sImie = $_SESSION['sImie'];
-	$sId = $_SESSION['sId'];
-	$sUpr = $_SESSION['sUpr'];
-	$sIdDzial = $_SESSION['sIdDzial'];
-
 	$warunek = "StatusZatw = 0 AND p.id = {$sId}";
 	$zamowieniaAll = getZamowienia($link, $warunek); // 
 

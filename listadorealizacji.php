@@ -1,20 +1,8 @@
 <?php
 
-	require_once 'nazwadb.inc.php';
-	require 'core/funkcje.php';
-
-	session_start();
-	checkSesion();
-
-	$sNazwisko = $_SESSION['sNazwisko'];
-	$sImie = $_SESSION['sImie'];
-	$sId = $_SESSION['sId'];
-	$sUpr = $_SESSION['sUpr'];
-	$sIdDzial = $_SESSION['sIdDzial'];
+	require 'core/init.php';
 
 	$sUpr = ($sUpr & 31);  //filturjemy wszystkie uprawnienia bez uprawnie administratora 011111
-
-	$link = polaczZBaza($host, $uzytkownik, $haslo, $nazwabazydanych);
 
 	if ($sUpr == 1) { // jeśli tylko pracownik 
 		$warunek = "StatusZatw = 1 AND StatusReal = 0 AND akcPrez !=0 AND p.id = {$sId}"; // StatusZatw = 1 - zamowienia zatwierdzone

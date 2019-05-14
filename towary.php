@@ -23,10 +23,12 @@ if  (($_GET['menu']) == 'dodaj') {
 	$towaryOstatnioDodane = getTowaryOstatnioDodane($link);
 	include ('view/dodajTowar.view.php');
 }
-if  (($_GET['menu']) == 'lista') {     //formatka wyszukiwania towarow
+
+if  (($_GET['menu']) == 'lista') {    
 	$towary = getTowary($link);
 	include ('view/listaTowarow.view.php');
 }
+
 if  (($_GET['menu']) == 'edycja') {
 		if (isset($_POST['fNazwaTow'])) {
 			$fNazwaTow = $_POST['fNazwaTow'];

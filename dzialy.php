@@ -11,27 +11,7 @@
 </head>
 <body>
 <?php
-require_once 'nazwadb.inc.php';
-require 'core/funkcje.php';
-
-session_start();
-checkSesion();
-
-if ($_SESSION['sUpr'] == 1) {
-	echo "<H1>Brak uprawnień</h1>";
-	exit();
-}
-
-$link = polaczZBaza($host, $uzytkownik, $haslo, $nazwabazydanych);
-if (!$link) {
-	echo "Error: Unable to connect to MySQL." . PHP_EOL;
-	echo "Debugging errno: " . mysqli_connect_errno() . PHP_EOL;
-	echo "Debugging error: " . mysqli_connect_error() . PHP_EOL;
-	exit;
-}
-mysqli_query($link, "SET NAMES utf8");
-mysqli_query($link, "SET CHARACTER SET utf8");
-mysqli_query($link, "SET collation_connection = utf8_polish_ci");
+	require 'core/init.php';
 
 if  (($_GET['menu']) == 'dodaj') {
 	if (isset($_POST['fNazwa'])) {

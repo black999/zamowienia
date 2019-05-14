@@ -2,11 +2,6 @@
 
 	require 'core/init.php';
 
-	$sNazwisko = $_SESSION['sNazwisko'];
-	$sImie = $_SESSION['sImie'];
-	$sId = $_SESSION['sId'];
-	$sUpr = $_SESSION['sUpr'];
-	$sIdDzial = $_SESSION['sIdDzial'];
 	$warunek = getWarunekByUprawnienia($sUpr, $sId, $sIdDzial);
 	$zamowieniaAll = getZamowienia($link, $warunek); 
 
