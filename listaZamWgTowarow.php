@@ -2,12 +2,6 @@
 
 	require 'core/init.php';
 
-	$sNazwisko = $_SESSION['sNazwisko'];
-	$sImie = $_SESSION['sImie'];
-	$sId = $_SESSION['sId'];
-	$sUpr = $_SESSION['sUpr'];
-	$sIdDzial = $_SESSION['sIdDzial'];
-
 	$zamowieniaAll = getZamowienia($link, "t.id = {$_GET['id']}"); 
 	$towar = getTowar($link, $_GET['id']);
 	if (!$zamowieniaAll) {

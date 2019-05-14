@@ -111,7 +111,7 @@ function getZamowienieBiuroweDoRealizacji($link){
 function getZamowienia($link, $warunek = ""){
 	$warunek =  ($warunek != "") ? " WHERE " . $warunek : "";
 	$sql = "SELECT zm.IdZamowienia, zm.StatusZatw, zm.Data, zm.akcKier, zm.akcZam, 
-					zm.akcKsie, zm.akcPrez, zm.StatusReal, zm.Info, p.Imie, p.Nazwisko, t.nazwa,
+					zm.akcKsie, zm.akcPrez, zm.StatusReal, zm.Info, p.Imie, p.Nazwisko, 
 					d.Nazwa as Dzial,
 					sum(zt.Ilosc*t.cenaZak) as wartosc
 			from zamowienia zm
