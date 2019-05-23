@@ -1,8 +1,12 @@
 <?php 
 	require 'core/init.php';
 
-	if ((isset($_GET['menu'])) and ($_GET['menu'] == 'dodajInfo')){
-		dodajInfo($link, $_POST['fInfo'], $_GET['fIdzam']);
+	if ((isset($_GET['menu'])) 
+		and	($_GET['menu'] == 'dodajInfo') 
+		and ($_POST['fInfo'] != '')){
+		$Info = getZamowienie($link, $_GET['fIdzam'])['Info'];
+		$Info .= "<strong>" . $sImie . " " . $sNazwisko . "</strong> :  " . $_POST['fInfo'] . "<br>";
+		dodajInfo($link, $Info, $_GET['fIdzam']);
 		$string = "Location: ?fIdzam=" . $_GET['fIdzam'];
 		header($string);
 	}

@@ -199,7 +199,11 @@
 			</TABLE>
 			<form action='?menu=dodajInfo&fIdzam=<?= $_GET['fIdzam'] ?>' method='POST'>
 				<h3>Komentarz do zamówienia:</h3>
-				 <textarea rows='6' cols='80' name='fInfo'><?= $zamowienie['Info'] . "\n" . $sImie . " " . $sNazwisko . ":  " ?></textarea><br> 
+				<div>
+					<span><?= $zamowienie['Info'] ?></span><br>
+				</div>
+				<!-- <textarea rows='6' cols='80' name='fInfo'><?= $zamowienie['Info'] . "\n" . $sImie . " " . $sNazwisko . ":  " ?></textarea><br>  -->
+				<textarea rows='2' cols='80' name='fInfo'></textarea><br> 
 				<input type='submit' class='button' value='Zapisz komentarz'>
 			</form>
 		</div>
