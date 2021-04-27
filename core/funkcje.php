@@ -99,7 +99,9 @@ function getZamowienieBiuroweDoRealizacji($link){
 		join personel p on z.Zamawiajacy = p.id
 		where t.biurowy = true and
 		z.StatusReal = '0'
-		and akcPrez <> '0' ";
+		and akcPrez <> '0' 
+		and z.Data >= DATE_SUB(NOW(), Interval 1 year)
+		order by z.Data DESC";
 	$result = mysqli_query($link, $sql);
 	while ($row = $result->fetch_assoc()) {
 	    $rows[] = $row;
@@ -108,10 +110,11 @@ function getZamowienieBiuroweDoRealizacji($link){
 	return $rows;
 }
 
+
 function getZamowienia($link, $warunek = ""){
 	$warunek =  ($warunek != "") ? " WHERE " . $warunek : "";
 	$sql = "SELECT zm.IdZamowienia, zm.StatusZatw, zm.Data, zm.akcKier, zm.akcZam, 
-					zm.akcKsie, zm.akcPrez, zm.StatusReal, zm.Info, p.Imie, p.Nazwisko, 
+					zm.akcKsie, zm.akcPrez, zm.StatusReal, zm.Info, p.Imie, p.Nazwisko, p.Dzial,
 					d.Nazwa as Dzial,
 					sum(zt.Ilosc*t.cenaZak) as wartosc
 			from zamowienia zm

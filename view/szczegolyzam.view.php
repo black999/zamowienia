@@ -36,7 +36,7 @@
 					<?php if ($zamowienie['StatusZatw'] == '1' &&  $zamowienie['akcPrez'] == '0' ) : ?>
 						<span style='color: green'>DO AKCEPTACJI</span>
 		           	<?php endif; ?> 
-		           	<?php if ($zamowienie['StatusReal'] == '0' &&  $zamowienie['akcPrez'] != '0' && (($_SESSION['sUpr'] & 4) == 4)) : ?> <!-- // jesli zaakceptowane i mamy uprawnienia -->
+		           	<?php if ($zamowienie['StatusReal'] == '0' &&  $zamowienie['akcPrez'] != '0' && (($_SESSION['sUpr'] & 2) == 2)) : ?> <!-- // jesli zaakceptowane i mamy uprawnienia 2 - uprawnienia kierownika-->
 						<a class="button" href="zamowienia.php?menu=realizujZam&fIdzam=<?= $_GET['fIdzam'] ?>">Zaznacz jako zrealizowane</a>
 					<?php endif; ?>	
 					<?php if ($zamowienie['StatusReal'] == '1') : ?>
